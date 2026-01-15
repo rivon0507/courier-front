@@ -1,0 +1,38 @@
+<div class="mat-elevation-z2">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <!-- DateEnvoi Column -->
+    <ng-container matColumnDef="dateEnvoi">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date d'envoi</th>
+      <td mat-cell *matCellDef="let row">{{row.dateEnvoi}}</td>
+    </ng-container>
+
+    <!-- Destinataire Column -->
+    <ng-container matColumnDef="destinataire">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Destinataire</th>
+      <td mat-cell *matCellDef="let row">{{row.destinataire}}</td>
+    </ng-container>
+
+    <!-- Observation Column -->
+    <ng-container matColumnDef="observation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Observation</th>
+      <td mat-cell *matCellDef="let row">{{row.observation}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="dataSource.data.length"
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      aria-label="Select page">
+  </mat-paginator>
+</div>
