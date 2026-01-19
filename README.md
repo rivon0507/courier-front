@@ -1,59 +1,117 @@
 # Courier
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
+Courier is a modern Angular application for tracking incoming and outgoing company mail.
 
-## Development server
+It is designed as:
+- A **web platform** for centralized usage
+- With a **future Electron desktop build** in mind
+- Supporting **offline-first workflows** and optional synchronization
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
+## Table of contents
+
+<!-- TOC -->
+* [Courier](#courier)
+  * [Table of contents](#table-of-contents)
+  * [Domain overview](#domain-overview)
+    * [Réception](#réception)
+    * [Envoi](#envoi)
+    * [Bordereau d’envoi](#bordereau-denvoi)
+  * [Architecture goals](#architecture-goals)
+  * [Project structure](#project-structure)
+  * [Key architectural rules](#key-architectural-rules)
+  * [Technology stack](#technology-stack)
+  * [Status](#status)
+  * [License](#license)
+<!-- TOC -->
+
+---
+
+## Domain overview
+
+### Réception
+Tracks incoming mail and documents received by the company.
+
+### Envoi
+Tracks outgoing mail and documents sent by the company.
+Each Envoi can generate a **Bordereau d’envoi** (dispatch slip).
+
+### Bordereau d’envoi
+A generated document summarizing outgoing mail, configurable via settings
+(e.g. numbering format, company information, headers).
+
+---
+
+## Architecture goals
+
+- Domain-driven feature structure
+- Clear separation between UI, domain logic, and infrastructure
+- No coupling between Angular components and persistence mechanisms
+- Prepared for:
+  - Web (HTTP backend)
+  - Desktop (Electron + SQLite)
+  - Offline usage
+  - Future synchronization strategies
+
+---
+
+## Project structure
+
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+src/app/
+├── core/
+│   ├── api/        # domain I/O abstractions (HTTP, Electron, local)
+│   ├── services/  # cross-cutting concerns (http wrapper, notifications, platform)
+│   └── layout/    # app shell and navigation
+│
+├── shared/
+│   └── components, pipes, directives (UI-only, no domain logic)
+│
+├── features/
+│   ├── envoi/
+│   ├── reception/
+│   ├── bordereau/
+│   └── settings/
+│
+├── app.routes.ts
+└── app.config.ts
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## Key architectural rules
 
-## Building
+- Components are UI-focused and orchestration-only
+- Domain logic lives in feature-level stores/facades
+- HTTP, Electron IPC, and persistence are abstracted in `core/api`
+- Angular Material datasources are UI adapters, not state containers
+- Modal forms are components, not routed pages
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## Technology stack
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- Angular (standalone components, modern router)
+- Angular Material
+- RxJS and/or Angular Signals (used consistently per feature)
+- Future:
+  - Electron
+  - SQLite
+  - Offline-first support
 
-## Running unit tests
+---
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Status
 
-```bash
-ng test
-```
+This project is actively evolving and used as:
+- A learning playground for clean Angular architecture
+- A showcase of real-world, forward-thinking frontend design
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## License
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Portfolio project
