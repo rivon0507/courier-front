@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
-import { LayoutComponent } from './layout/layout.component';
-import { EnvoiComponent } from './envoi/envoi.component';
-import { ReceptionComponent } from './reception/reception.component';
+import { LayoutComponent } from '@core/layout/layout.component';
 
 export const routes: Routes = [
   {
@@ -10,13 +8,16 @@ export const routes: Routes = [
     children: [
       {
         path: "envoi",
-        component: EnvoiComponent,
-        title: "Envoi"
+        loadChildren: () => import('./features/envoi/envoi.routes').then(m => m.envoiRoutes)
       },
       {
         path: "reception",
-        component: ReceptionComponent,
-        title: "Reception"
+        loadChildren: () => import('./features/reception/reception.routes').then(m => m.receptionRoutes)
+      },
+      {
+        path: "",
+        redirectTo: "reception",
+        pathMatch: "full"
       }
     ]
   }
