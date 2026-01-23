@@ -4,7 +4,7 @@
       Nouvelle réception
     </button>
   </div>
-  <table mat-table class="full-width-table" matSort aria-label="Elements">
+  <table mat-table class="full-width-table" matSort aria-label="Elements" [dataSource]="dataSource">
     <!-- DateReception Column -->
     <ng-container matColumnDef="dateReception">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Date de récéption</th>
