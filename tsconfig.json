@@ -24,6 +24,9 @@
       ],
       "@features/*": [
         "src/app/features/*"
+      ],
+      "@test": [
+        "src/test.js"
       ]
     }
   },
