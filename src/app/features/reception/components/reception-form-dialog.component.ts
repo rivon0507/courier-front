@@ -1,11 +1,11 @@
-import { Component, inject, Inject } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Reception } from '../models/reception.model';
@@ -29,6 +29,7 @@ import { Reception } from '../models/reception.model';
 export class ReceptionFormDialogComponent {
   private fb = inject(FormBuilder);
   private dialogRef = inject(MatDialogRef<ReceptionFormDialogComponent>);
+  public data: Reception | null = inject(MAT_DIALOG_DATA);
 
   receptionForm = this.fb.group({
     dateReception: [null as string | null, Validators.required],
@@ -36,9 +37,9 @@ export class ReceptionFormDialogComponent {
     reference: [null as string | null, Validators.required]
   });
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Reception | null) {
-    if (data) {
-      this.receptionForm.patchValue(data);
+  constructor() {
+    if (this.data) {
+      this.receptionForm.patchValue(this.data);
     }
   }
 
