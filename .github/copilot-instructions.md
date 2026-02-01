@@ -27,13 +27,17 @@ Future extensions to keep in mind:
 
 src/app/
 - core/        : application-wide singletons and infrastructure
+- layouts/     : app shell and navigation
 - shared/      : reusable UI components, directives, and pipes (no domain logic)
 - features/    : domain features only (envoi, reception, bordereau, settings)
 
 ### core/
 - core/api/        : domain API abstractions (HTTP, Electron, local, etc.)
 - core/services/  : cross-cutting services (http wrapper, notifications, platform detection)
-- core/layout/    : app shell and navigation
+
+### layouts/
+
+app shell and navigation
 
 ### features/<domain>/
 Each feature MUST contain:
@@ -48,7 +52,7 @@ Each feature MUST contain:
 ## Routing & UI rules
 - Routed components live in `pages/`
 - Modal/dialog forms are **components**, not pages, unless explicitly requested
-- Layout and navigation belong to `core/layout`
+- Layout and navigation belong to `layouts`
 
 ---
 

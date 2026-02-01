@@ -21,6 +21,8 @@ Optional body:
 <body>
 ```
 
+DO NOT wrap the commit message in quotes or backticks.
+
 ---
 
 ## 2) Allowed types

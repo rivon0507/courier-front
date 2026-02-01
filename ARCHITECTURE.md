@@ -36,8 +36,8 @@ The codebase uses a **feature-first** structure under `src/app/`.
 src/app
 ├── core
 │   ├── api
-│   ├── layout
 │   └── services
+├── layouts
 ├── shared
 └── features
     ├── envoi
@@ -84,7 +84,7 @@ Routing and navigation are centralized in the app shell.
 
 ```
 
-core/layout
+layouts
 
 ```
 
@@ -97,7 +97,7 @@ features/<domain>/<domain>.routes.ts
 ```
 
 The root routing configuration should compose:
-* the app shell/layout routes from `core/layout`
+* the app shell/layout routes from `layouts`
 * the domain routes from `features/*/*.routes.ts`
 
 ---

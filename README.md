@@ -63,8 +63,9 @@ A generated document summarizing outgoing mail, configurable via settings
 src/app/
 ├── core/
 │   ├── api/        # domain I/O abstractions (HTTP, Electron, local)
-│   ├── services/  # cross-cutting concerns (http wrapper, notifications, platform)
-│   └── layout/    # app shell and navigation
+│   └── services/  # cross-cutting concerns (http wrapper, notifications, platform)
+│
+├── layouts/    # app shell and navigation
 │
 ├── shared/
 │   └── components, pipes, directives (UI-only, no domain logic)

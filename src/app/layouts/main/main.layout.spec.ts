@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { LayoutComponent } from './layout.component';
+import { MainLayout } from './main.layout';
 import { mockMatchMedia } from '@test';
 
-describe('LayoutComponent', () => {
-  let component: LayoutComponent;
-  let fixture: ComponentFixture<LayoutComponent>;
+describe('MainLayout', () => {
+  let component: MainLayout;
+  let fixture: ComponentFixture<MainLayout>;
 
   beforeEach(() => {
     if (!window.matchMedia) {
@@ -16,11 +16,11 @@ describe('LayoutComponent', () => {
     }
 
     TestBed.configureTestingModule({
-      imports: [LayoutComponent],
+      imports: [MainLayout],
       providers: [provideRouter([])]
     });
 
-    fixture = TestBed.createComponent(LayoutComponent);
+    fixture = TestBed.createComponent(MainLayout);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
