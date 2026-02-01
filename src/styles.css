@@ -1,0 +1,8 @@
+@import "tailwindcss/theme";
+@import "tailwindcss/utilities";
+
+@layer base {
+  button.mat-mdc-button-base {
+    @apply transition-colors;
+  }
+}
