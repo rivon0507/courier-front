@@ -1,7 +1,13 @@
 import { Routes } from '@angular/router';
 import { MainLayout } from '@layouts/main/main.layout';
+import { AuthLayout } from '@layouts/auth/auth.layout';
 
 export const routes: Routes = [
+  {
+    path: "auth",
+    component: AuthLayout,
+    loadChildren: () => import("./features/auth/auth.routes").then(m => m.authRoutes),
+  },
   {
     path: "",
     component: MainLayout,
@@ -16,7 +22,7 @@ export const routes: Routes = [
       },
       {
         path: "",
-        redirectTo: "reception",
+        redirectTo: "/auth/login",
         pathMatch: "full"
       }
     ]

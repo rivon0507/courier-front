@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { routes } from './app.routes';
 import { mockMatchMedia } from '@test';
-import { MainLayout } from '@layouts/main/main.layout';
+import { AuthLayout } from '@layouts/auth/auth.layout';
 
 describe('Router navigation', () => {
   beforeEach(() => {
@@ -22,7 +22,7 @@ describe('Router navigation', () => {
 
   it('should render the layout component for all paths /', async () => {
     const harness = await RouterTestingHarness.create();
-    const component = await harness.navigateByUrl('/', MainLayout);
+    const component = await harness.navigateByUrl('/', AuthLayout);
     expect(component).toBeTruthy();
   });
 });

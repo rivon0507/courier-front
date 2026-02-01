@@ -1,0 +1,50 @@
+<mat-card class="w-full max-w-md p-6 space-y-8" xmlns="http://www.w3.org/1999/html">
+  <mat-card-header class="space-y-4 flex flex-col items-center">
+    <img matCardImageLarge ngSrc="/courier-logo.png" alt="Courier Logo" height="500" width="500">
+    <div class="text-center space-y-2">
+      <mat-card-title class="text-3xl!">Bienvenue</mat-card-title>
+      <mat-card-subtitle class="font-light! text-sm!">Système de gestion de courrier administratif</mat-card-subtitle>
+    </div>
+  </mat-card-header>
+  <mat-card-content class="flex flex-col items-center">
+    <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()" class="space-y-2">
+      <!-- E-mail field -->
+      <mat-form-field class="w-full">
+        <mat-label>Adresse e-mail</mat-label>
+        <input matInput formControlName="email" autocomplete="email">
+        @if (loginForm.controls.email.hasError('required')) {
+          <mat-error>L'adresse e-mail est requise</mat-error>
+        } @else if (loginForm.controls.email.hasError('email')) {
+          <mat-error>Adresse e-mail invalide</mat-error>
+        }
+      </mat-form-field>
+      <!-- Password field -->
+      <mat-form-field class="w-full">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput type="password" formControlName="password">
+        @if (loginForm.controls.email.hasError('required')) {
+          <mat-error>Veuillez saisir le mot de passe</mat-error>
+        }
+      </mat-form-field>
+      <!-- Login button -->
+      <div class="w-full"
+           matTooltip="L'adresse e-mail et le mot de passe doived être valides"
+           [matTooltipDisabled]="loginForm.valid">
+        <button class="w-full" mat-flat-button type="submit" [disabled]="loginForm.invalid">
+          Se connecter
+        </button>
+      </div>
+      <!-- Divider -->
+      <div class="flex items-center gap-3">
+        <mat-divider class="flex-1"/>
+        <span>OU</span>
+        <mat-divider class="flex-1"/>
+      </div>
+      <!-- Register button -->
+      <button class="w-full" mat-raised-button type="button">
+        Créer un compte
+      </button>
+    </form>
+
+  </mat-card-content>
+</mat-card>
