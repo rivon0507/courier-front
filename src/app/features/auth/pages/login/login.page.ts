@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import {
   MatCard,
   MatCardContent,
@@ -13,6 +13,10 @@ import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/in
 import { MatButton } from '@angular/material/button';
 import { MatDivider } from '@angular/material/list';
 import { MatTooltip } from '@angular/material/tooltip';
+import { SessionStore } from '@core/session/session.store';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatIcon } from '@angular/material/icon';
+import { Credentials } from '@core/session/session.model';
 
 @Component({
   selector: 'app-login-page',
@@ -32,19 +36,30 @@ import { MatTooltip } from '@angular/material/tooltip';
     MatButton,
     MatCardLgImage,
     MatDivider,
-    MatTooltip
+    MatTooltip,
+    MatProgressSpinner,
+    MatIcon
   ],
   templateUrl: './login.page.html',
   styleUrl: './login.page.css',
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
   private fb = inject(FormBuilder);
+  private sessionStore = inject(SessionStore);
+  loggingIn = computed(() => this.sessionStore.loading());
+  loginError = computed(() => this.sessionStore.error());
   loginForm = this.fb.group({
-    email: [null as string | null, [Validators.required, Validators.email]],
-    password: [null as string | null, Validators.required]
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required]
   });
 
-  onSubmit (): void {
+  ngOnInit (): void {
+    this.loginForm.valueChanges.subscribe(
+      () => this.sessionStore.clearError()
+    );
+  }
 
+  onSubmit (): void {
+    this.sessionStore.login(<Credentials>this.loginForm.value);
   }
 }

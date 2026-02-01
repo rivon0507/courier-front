@@ -1,12 +1,20 @@
 <mat-card class="w-full max-w-md p-6 space-y-8" xmlns="http://www.w3.org/1999/html">
   <mat-card-header class="space-y-4 flex flex-col items-center">
-    <img matCardImageLarge ngSrc="/courier-logo.png" alt="Courier Logo" height="781" width="781">
+    <img matCardImageLarge ngSrc="/courier-logo.png" alt="Courier Logo" height="781" width="781" priority>
     <div class="text-center space-y-2">
       <mat-card-title class="text-3xl!">Bienvenue</mat-card-title>
       <mat-card-subtitle class="font-light! text-sm!">Système de gestion de courrier administratif</mat-card-subtitle>
     </div>
   </mat-card-header>
   <mat-card-content class="flex flex-col items-center">
+    @if (loginError()) {
+      <div
+        class="mb-4 rounded-md border border-red-300 bg-red-50 px-4  py-3 text-sm text-red-700 flex items-center gap-2"
+        role="alert">
+        <mat-icon fontIcon="error_outline" class="text-red-600"></mat-icon>
+        <span>Adresse e-mail ou mot de passe incorrect.</span>
+      </div>
+    }
     <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()" class="space-y-2">
       <!-- E-mail field -->
       <mat-form-field class="w-full">
@@ -21,7 +29,7 @@
       <!-- Password field -->
       <mat-form-field class="w-full">
         <mat-label>Mot de passe</mat-label>
-        <input matInput type="password" formControlName="password">
+        <input matInput type="password" formControlName="password" autocomplete="current-password">
         @if (loginForm.controls.email.hasError('required')) {
           <mat-error>Veuillez saisir le mot de passe</mat-error>
         }
@@ -30,8 +38,23 @@
       <div class="w-full"
            matTooltip="L'adresse e-mail et le mot de passe doived être valides"
            [matTooltipDisabled]="loginForm.valid">
-        <button class="w-full" mat-flat-button type="submit" [disabled]="loginForm.invalid">
-          Se connecter
+        <button
+          class="w-full relative"
+          mat-flat-button
+          type="submit"
+          [disabled]="loggingIn() || loginForm.invalid"
+          [attr.aria-busy]="loggingIn()">
+
+          @if (loggingIn()) {
+            <mat-progress-spinner
+              mode="indeterminate"
+              diameter="20"
+              class="absolute left-1/2 top-1/2 -translate-x-1/2 translate-y-1/2">
+            </mat-progress-spinner>
+          }
+          <span [class.opacity-0]="loggingIn()">
+            Se connecter
+          </span>
         </button>
       </div>
       <!-- Divider -->
