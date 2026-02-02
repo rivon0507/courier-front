@@ -19,7 +19,7 @@
       <!-- E-mail field -->
       <mat-form-field class="w-full">
         <mat-label>Adresse e-mail</mat-label>
-        <input matInput formControlName="email" autocomplete="email">
+        <input matInput formControlName="email" autocomplete="email" type="email">
         @if (loginForm.controls.email.hasError('required')) {
           <mat-error>L'adresse e-mail est requise</mat-error>
         } @else if (loginForm.controls.email.hasError('email')) {

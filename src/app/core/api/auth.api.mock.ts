@@ -1,16 +1,26 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable, InjectionToken } from '@angular/core';
 import { AuthApi, LoginRequest, LoginResponse } from '@core/api/auth.api';
-import { Observable, of, throwError } from "rxjs";
-import { delay } from 'rxjs/operators';
-import { dematerialize, materialize } from 'rxjs/operators';
+import { MonoTypeOperatorFunction, Observable, of, throwError } from "rxjs";
+import { delay, dematerialize, materialize } from 'rxjs/operators';
+
+export const MOCK_API_DELAY = new InjectionToken<number>("MOCK_API_DELAY", {
+  providedIn: 'root',
+  factory: () => 1200,
+})
+
+function optionalDelay<T>(ms: number): MonoTypeOperatorFunction<T> {
+  return ms > 0 ? delay(ms) : (source: Observable<T>) => source;
+}
 
 @Injectable()
 export class AuthApiMock extends AuthApi {
+  delay = inject(MOCK_API_DELAY);
+
   override login (request: LoginRequest): Observable<LoginResponse> {
     if (request.email != "user@example.com") {
       return throwError(() => new Error()).pipe(
         materialize(),
-        delay(1200),
+        optionalDelay(this.delay),
         dematerialize()
       );
     }
@@ -25,7 +35,7 @@ export class AuthApiMock extends AuthApi {
         role: 'USER'
       }
     }).pipe(
-      delay(1200)
+      optionalDelay(this.delay)
     );
   }
 
