@@ -10,3 +10,8 @@ export const mockMatchMedia = (query: string): MediaQueryList =>
     addEventListener: noop,
     removeEventListener: noop,
   } as unknown as MediaQueryList);
+
+export const input = (element: HTMLInputElement, value: string) => {
+  element.value = value;
+  element.dispatchEvent(new Event('input'));
+};

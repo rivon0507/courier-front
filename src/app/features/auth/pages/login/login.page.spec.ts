@@ -7,6 +7,7 @@ import { provideRouter, Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { SessionStore } from '@core/session/session.store';
 import { By } from '@angular/platform-browser';
+import { input } from '@test';
 
 @Component({template: `<h1>Home Page</h1>`})
 class HomePage {
@@ -58,14 +59,13 @@ describe('LoginPage', () => {
 
   async function submitFormWith ({email, password}: { email: string, password: string }) {
     const element: HTMLElement = fixture.nativeElement;
-    const emailInput = <HTMLInputElement>element.querySelector("input[type='email']");
-    const passwordInput = <HTMLInputElement>element.querySelector("input[type='password']");
-    const submitButton = <HTMLButtonElement>element.querySelector("button[type='submit']");
+    const emailInput = element.querySelector("input[type='email']") as HTMLInputElement;
+    const passwordInput = element.querySelector("input[type='password']") as HTMLInputElement;
+    const submitButton = element.querySelector("button[type='submit']") as HTMLButtonElement;
 
-    emailInput.value = email;
-    emailInput.dispatchEvent(new Event('input'));
-    passwordInput.value = password;
-    passwordInput.dispatchEvent(new Event('input'));
+    input(emailInput, email);
+    input(passwordInput, password);
+
     fixture.detectChanges();
     expect(submitButton.disabled).toBeFalsy();
     submitButton.click();
