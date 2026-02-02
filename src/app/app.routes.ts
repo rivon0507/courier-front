@@ -21,6 +21,11 @@ export const routes: Routes = [
         loadChildren: () => import('./features/reception/reception.routes').then(m => m.receptionRoutes)
       },
       {
+        path: "home",
+        redirectTo: "/reception",
+        pathMatch: "full",
+      },
+      {
         path: "",
         redirectTo: "/auth/login",
         pathMatch: "full"

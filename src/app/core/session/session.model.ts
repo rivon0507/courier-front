@@ -2,7 +2,7 @@ export interface User {
   displayName: string,
 }
 
-export type SessionStatus = "anonymous" | "authenticated";
+export type SessionActivity = "login" | "register";
 
 export interface Credentials {
   email: string;

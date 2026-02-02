@@ -17,6 +17,9 @@ import { SessionStore } from '@core/session/session.store';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon';
 import { Credentials } from '@core/session/session.model';
+import { filter, take } from 'rxjs';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -46,12 +49,23 @@ import { Credentials } from '@core/session/session.model';
 export class LoginPage implements OnInit {
   private fb = inject(FormBuilder);
   private sessionStore = inject(SessionStore);
-  loggingIn = computed(() => this.sessionStore.loading());
+  private router = inject(Router);
+  private authSuccess$ = toObservable(this.sessionStore.isAuthenticated).pipe(
+    filter(status => status),
+    take(1)
+  );
+
+  loggingIn = computed(() => this.sessionStore.activity() === "login");
   loginError = computed(() => this.sessionStore.error());
+
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
   });
+
+  constructor () {
+    this.authSuccess$.subscribe(() => this.router.navigateByUrl("/home"))
+  }
 
   ngOnInit (): void {
     this.loginForm.valueChanges.subscribe(
