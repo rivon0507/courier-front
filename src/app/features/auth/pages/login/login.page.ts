@@ -19,7 +19,7 @@ import { MatIcon } from '@angular/material/icon';
 import { Credentials } from '@core/session/session.model';
 import { filter, take } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -41,7 +41,8 @@ import { Router } from '@angular/router';
     MatDivider,
     MatTooltip,
     MatProgressSpinner,
-    MatIcon
+    MatIcon,
+    RouterLink
   ],
   templateUrl: './login.page.html',
   styleUrl: './login.page.css',

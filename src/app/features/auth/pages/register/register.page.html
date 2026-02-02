@@ -1,0 +1,95 @@
+<mat-card class="w-full max-w-md p-6 space-y-6" xmlns="http://www.w3.org/1999/html">
+  <mat-card-header class="flex flex-col items-center">
+    <img matCardImageLarge ngSrc="/courier-logo.png" alt="Courier Logo" height="781" width="781" priority>
+    <div class="text-center">
+      <mat-card-title class="text-3xl!">Créer un compte</mat-card-title>
+      <mat-card-subtitle class="font-light! text-sm!">Courier ── Système de gestion de courrier administratif
+      </mat-card-subtitle>
+    </div>
+  </mat-card-header>
+  <mat-card-content class="flex flex-col items-center">
+    @if (registerError()) {
+      <div
+        class="mb-4 rounded-md border border-red-300 bg-red-50 px-4  py-3 text-sm text-red-700 flex items-center gap-2"
+        role="alert">
+        <mat-icon fontIcon="error_outline" class="text-red-600"></mat-icon>
+        <span>{{ registerError() }}</span>
+      </div>
+    }
+    <form [formGroup]="registerForm" novalidate (ngSubmit)="onSubmit()">
+      <!-- display name field -->
+      <mat-form-field class="w-full">
+        <mat-label>Votre nom</mat-label>
+        <input type="text" matInput autocomplete="name" formControlName="displayName">
+        @if (registerForm.controls.displayName.hasError('required')) {
+          <mat-error>Le nom est requis</mat-error>
+        } @else if (registerForm.controls.displayName.hasError('maxlength')) {
+          <mat-error>Le nom est trop long</mat-error>
+        } @else if (registerForm.controls.displayName.hasError('pattern')) {
+          <mat-error>Le nom saisi est invalide</mat-error>
+        }
+      </mat-form-field>
+      <!-- E-mail field -->
+      <mat-form-field class="w-full">
+        <mat-label>Adresse e-mail</mat-label>
+        <input matInput formControlName="email" autocomplete="email" type="email">
+        @if (registerForm.controls.email.hasError('required')) {
+          <mat-error>L'adresse e-mail est requise</mat-error>
+        } @else if (registerForm.controls.email.hasError('email')) {
+          <mat-error>Adresse e-mail invalide</mat-error>
+        }
+      </mat-form-field>
+      <!-- Password field -->
+      <mat-form-field class="w-full">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput type="password" formControlName="password" autocomplete="new-password">
+        @if (registerForm.controls.password.hasError('required')) {
+          <mat-error>Veuillez saisir votre nouveau mot de passe</mat-error>
+        }
+      </mat-form-field>
+      <!-- Password confirmation field -->
+      <mat-form-field class="w-full" subscriptSizing="dynamic">
+        <mat-label>Confirmer le mot de passe</mat-label>
+        <input matInput type="password" formControlName="passwordConfirm" autocomplete="new-password">
+      </mat-form-field>
+      <mat-error class="error-slot text-xs px-4 pb-5"
+        [class.is-visible]="registerForm.hasError('passwordMismatch') && (registerForm.controls.password.touched || registerForm.controls.passwordConfirm.touched)">
+        Le mot de passe et la confirmation sont différents
+      </mat-error>
+      <!-- Register button -->
+      <div class="w-full"
+           matTooltip="Le nom, l'adresse e-mail et le mot de passe doived être valides"
+           [matTooltipDisabled]="registerForm.valid">
+        <button
+          class="w-full relative"
+          mat-flat-button
+          type="submit"
+          [disabled]="registering() || registerForm.invalid"
+          [attr.aria-busy]="registering()">
+
+          @if (registering()) {
+            <mat-progress-spinner
+              mode="indeterminate"
+              diameter="20"
+              class="absolute left-1/2 top-1/2 -translate-x-1/2 translate-y-1/2">
+            </mat-progress-spinner>
+          }
+          <span [class.opacity-0]="registering()">
+            Créer mon compte
+          </span>
+        </button>
+      </div>
+      <!-- Divider -->
+      <div class="flex items-center gap-3">
+        <mat-divider class="flex-1"/>
+        <span class="my-1">Vous avez déjà un compte?</span>
+        <mat-divider class="flex-1"/>
+      </div>
+      <!-- Login button -->
+      <button class="w-full" mat-raised-button type="button" routerLink="/auth/login">
+        Se connecter
+      </button>
+    </form>
+
+  </mat-card-content>
+</mat-card>
