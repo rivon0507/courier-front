@@ -1,9 +1,9 @@
-<mat-card class="w-full max-w-md p-6 space-y-8" xmlns="http://www.w3.org/1999/html">
-  <mat-card-header class="space-y-4 flex flex-col items-center">
+<mat-card class="w-full max-w-md p-6 space-y-6" xmlns="http://www.w3.org/1999/html">
+  <mat-card-header class="flex flex-col items-center">
     <img matCardImageLarge ngSrc="/courier-logo.png" alt="Courier Logo" height="781" width="781" priority>
-    <div class="text-center space-y-2">
+    <div class="text-center">
       <mat-card-title class="text-3xl!">Bienvenue</mat-card-title>
-      <mat-card-subtitle class="font-light! text-sm!">Système de gestion de courrier administratif</mat-card-subtitle>
+      <mat-card-subtitle class="font-light! text-sm!">Courier ── Système de gestion de courrier administratif</mat-card-subtitle>
     </div>
   </mat-card-header>
   <mat-card-content class="flex flex-col items-center">
@@ -15,7 +15,7 @@
         <span>Adresse e-mail ou mot de passe incorrect.</span>
       </div>
     }
-    <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()" class="space-y-2">
+    <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
       <!-- E-mail field -->
       <mat-form-field class="w-full">
         <mat-label>Adresse e-mail</mat-label>
@@ -60,7 +60,7 @@
       <!-- Divider -->
       <div class="flex items-center gap-3">
         <mat-divider class="flex-1"/>
-        <span>OU</span>
+        <span class="my-1">Vous n'avez pas de compte?</span>
         <mat-divider class="flex-1"/>
       </div>
       <!-- Register button -->
