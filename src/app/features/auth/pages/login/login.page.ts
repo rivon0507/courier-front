@@ -75,6 +75,6 @@ export class LoginPage implements OnInit {
   }
 
   onSubmit (): void {
-    this.sessionStore.login(<Credentials>this.loginForm.value);
+    this.sessionStore.login(this.loginForm.value as Credentials);
   }
 }

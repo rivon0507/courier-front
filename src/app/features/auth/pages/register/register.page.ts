@@ -22,8 +22,10 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SessionStore } from '@core/session/session.store';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { filter, take } from 'rxjs';
 
 @Component({
   selector: 'app-register-page',
@@ -53,6 +55,11 @@ import { SessionStore } from '@core/session/session.store';
 export class RegisterPage {
   private fb = inject(FormBuilder);
   private sessionStore = inject(SessionStore);
+  private router = inject(Router);
+  private authSuccess$ = toObservable(this.sessionStore.isAuthenticated).pipe(
+    filter(status => status),
+    take(1)
+  );
 
   registering = computed(() => this.sessionStore.activity() === "register");
   registerError = computed(() => this.sessionStore.error());
@@ -67,8 +74,16 @@ export class RegisterPage {
     {validators: [passwordMismatchValidator]}
   );
 
-  onSubmit () {
+  constructor () {
+    this.authSuccess$.subscribe(() => this.router.navigateByUrl("/home"));
+  }
 
+  onSubmit (): void {
+    this.sessionStore.register({
+      displayName: this.registerForm.value.displayName!,
+      email: this.registerForm.value.email!,
+      password: this.registerForm.value.password!
+    });
   }
 }
 

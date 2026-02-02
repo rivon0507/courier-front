@@ -5,9 +5,9 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface LoginResponse {
+export interface AuthResponse {
   accessToken: string;
-  expiresIn: string;
+  expiresIn: number;
   tokenType: string
   user: {
     email: string;
@@ -16,6 +16,13 @@ export interface LoginResponse {
   }
 }
 
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  displayName: string;
+}
+
 export abstract class AuthApi {
-  abstract login (request: LoginRequest): Observable<LoginResponse>;
+  abstract login (request: LoginRequest): Observable<AuthResponse>;
+  abstract register (request: RegisterRequest): Observable<AuthResponse>;
 }

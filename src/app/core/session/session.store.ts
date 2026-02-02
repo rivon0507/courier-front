@@ -1,6 +1,6 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { AuthApi, LoginRequest, LoginResponse } from '@core/api/auth.api';
-import { Credentials, SessionActivity, User } from '@core/session/session.model';
+import { AuthApi, AuthResponse, LoginRequest, RegisterRequest } from '@core/api/auth.api';
+import { Credentials, SessionActivity, SignUpFormData, User } from '@core/session/session.model';
 import { finalize } from 'rxjs';
 
 @Injectable({
@@ -30,11 +30,23 @@ export class SessionStore {
       });
   }
 
+  register (signUpFormData: SignUpFormData): void {
+    this._activity.set("register");
+    this._error.set(null);
+
+    this.api.register(signUpFormData as RegisterRequest)
+      .pipe(finalize(() => this._activity.set(null)))
+      .subscribe({
+        next: (registerResponse) => this.setUserAndAccessToken(registerResponse),
+        error: (err) => this._error.set(err.message || "Inscription échouée"),
+      });
+  }
+
   clearError(): void {
     this._error.set(null);
   }
 
-  private setUserAndAccessToken (loginResponse: LoginResponse) {
+  private setUserAndAccessToken (loginResponse: AuthResponse) {
     this._user.set(loginResponse.user);
     this._accessToken.set(loginResponse.accessToken);
   }
