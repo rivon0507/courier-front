@@ -1,0 +1,8 @@
+.error-slot {
+  visibility: hidden;
+  height: 1.25em;
+  display: block;
+}
+.error-slot.is-visible {
+  visibility: visible;
+}

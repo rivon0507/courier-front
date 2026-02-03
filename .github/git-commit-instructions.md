@@ -21,6 +21,8 @@ Optional body:
 <body>
 ```
 
+DO NOT wrap the commit message in quotes or backticks.
+
 ---
 
 ## 2) Allowed types
@@ -86,10 +88,3 @@ Use the body only when:
 * clarifying non-obvious behavior
 
 Keep it short and factual.
-
-```
-
-If you want, next we can:
-- align this with your **PR title convention**
-- or add a tiny **“when to use refactor vs chore”** note without bloating this file
-```

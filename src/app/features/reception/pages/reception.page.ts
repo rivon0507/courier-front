@@ -7,12 +7,13 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Reception } from '../models/reception.model';
 import { ReceptionStore } from '../data/reception.store';
 import { ReceptionFormDialogComponent } from '../components/reception-form-dialog.component';
+import { MatCard, MatCardHeader } from '@angular/material/card';
 
 @Component({
   selector: 'app-reception-page',
   templateUrl: './reception.page.html',
   styleUrl: './reception.page.css',
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, MatDialogModule],
+  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, MatDialogModule, MatCard, MatCardHeader],
 })
 export class ReceptionPage implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;

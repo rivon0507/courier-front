@@ -1,10 +1,16 @@
 import { Routes } from '@angular/router';
-import { LayoutComponent } from '@core/layout/layout.component';
+import { MainLayout } from './layout/main/main.layout';
+import { AuthLayout } from './layout/auth/auth.layout';
 
 export const routes: Routes = [
   {
+    path: "auth",
+    component: AuthLayout,
+    loadChildren: () => import("./features/auth/auth.routes").then(m => m.authRoutes),
+  },
+  {
     path: "",
-    component: LayoutComponent,
+    component: MainLayout,
     children: [
       {
         path: "envoi",
@@ -15,8 +21,13 @@ export const routes: Routes = [
         loadChildren: () => import('./features/reception/reception.routes').then(m => m.receptionRoutes)
       },
       {
+        path: "home",
+        redirectTo: "/reception",
+        pathMatch: "full",
+      },
+      {
         path: "",
-        redirectTo: "reception",
+        redirectTo: "/auth/login",
         pathMatch: "full"
       }
     ]

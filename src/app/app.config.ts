@@ -2,10 +2,15 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
+import { AuthApiMock } from '@core/api/auth.api.mock';
+import { AuthApi } from '@core/api/auth.api';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes)
+    provideRouter(routes),
+    provideHttpClient(withFetch()),
+    {provide: AuthApi, useClass: AuthApiMock},
   ]
 };

@@ -1,9 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { App } from './app';
+import { mockMatchMedia } from '../test';
 
 describe('App', () => {
   beforeEach(async () => {
+    if (!window.matchMedia) {
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: (query: string) => mockMatchMedia(query),
+      });
+    }
+
     await TestBed.configureTestingModule({
       imports: [App],
       providers: [provideRouter([])],

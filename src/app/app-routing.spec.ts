@@ -3,7 +3,9 @@ import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { routes } from './app.routes';
 import { mockMatchMedia } from '@test';
-import { LayoutComponent } from '@core/layout/layout.component';
+import { AuthLayout } from './layout/auth/auth.layout';
+import { AuthApi } from '@core/api/auth.api';
+import { AuthApiMock } from '@core/api/auth.api.mock';
 
 describe('Router navigation', () => {
   beforeEach(() => {
@@ -15,14 +17,17 @@ describe('Router navigation', () => {
     }
 
     TestBed.configureTestingModule({
-      providers: [provideRouter(routes)],
+      providers: [
+        provideRouter(routes),
+        {provide: AuthApi, useClass: AuthApiMock}
+      ],
       teardown: { destroyAfterEach: true },
     });
   });
 
   it('should render the layout component for all paths /', async () => {
     const harness = await RouterTestingHarness.create();
-    const component = await harness.navigateByUrl('/', LayoutComponent);
+    const component = await harness.navigateByUrl('/', AuthLayout);
     expect(component).toBeTruthy();
   });
 });

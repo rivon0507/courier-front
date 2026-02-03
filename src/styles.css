@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss/theme";
+@import "tailwindcss/utilities";
+
+@layer base {
+  button.mat-mdc-button-base {
+    @apply transition-colors;
+  }
+}
