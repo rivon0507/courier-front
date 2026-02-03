@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { routes } from './app.routes';
 import { mockMatchMedia } from '@test';
-import { AuthLayout } from '@layouts/auth/auth.layout';
+import { AuthLayout } from './layout/auth/auth.layout';
 import { AuthApi } from '@core/api/auth.api';
 import { AuthApiMock } from '@core/api/auth.api.mock';
 
