@@ -26,8 +26,8 @@ function isProblemDetailBody (body: unknown): body is ProblemDetail {
   return !!body
     && typeof body === 'object'
     && 'code' in body
-    && typeof (body as any).code === 'string'
-    && (!('detail' in body) || typeof (body as any).detail === 'string');
+    && typeof body.code === 'string'
+    && (!('detail' in body) || typeof body.detail === 'string');
 }
 
 function mapHttpErrorToApiError<DOMAIN_CODE extends string> (
