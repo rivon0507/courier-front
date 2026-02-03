@@ -26,7 +26,7 @@ export class SessionStore {
       .pipe(finalize(() => this._activity.set(null)))
       .subscribe({
         next: (loginResponse) => this.setUserAndAccessToken(loginResponse),
-        error: (err) => this._error.set(err.message || "Connexion échouée"),
+        error: () => this._error.set("Connexion échouée"),
       });
   }
 
@@ -38,7 +38,7 @@ export class SessionStore {
       .pipe(finalize(() => this._activity.set(null)))
       .subscribe({
         next: (registerResponse) => this.setUserAndAccessToken(registerResponse),
-        error: (err) => this._error.set(err.message || "Inscription échouée"),
+        error: () => this._error.set("Inscription échouée"),
       });
   }
 

@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import {
   MatCard,
@@ -52,7 +52,7 @@ import { filter, take } from 'rxjs';
   templateUrl: './register.page.html',
   styleUrl: './register.page.css',
 })
-export class RegisterPage {
+export class RegisterPage implements OnInit {
   private fb = inject(FormBuilder);
   private sessionStore = inject(SessionStore);
   private router = inject(Router);
@@ -76,6 +76,13 @@ export class RegisterPage {
 
   constructor () {
     this.authSuccess$.subscribe(() => this.router.navigateByUrl("/home"));
+  }
+
+  ngOnInit (): void {
+    this.sessionStore.clearError();
+    this.registerForm.valueChanges.subscribe(
+      () => this.sessionStore.clearError()
+    );
   }
 
   onSubmit (): void {

@@ -1,4 +1,4 @@
-<mat-card class="w-full max-w-md p-6 space-y-6" xmlns="http://www.w3.org/1999/html">
+<mat-card class="w-full max-w-md px-6 space-y-6" xmlns="http://www.w3.org/1999/html">
   <mat-card-header class="flex flex-col items-center">
     <img matCardImageLarge ngSrc="/courier-logo.png" alt="Courier Logo" height="781" width="781" priority>
     <div class="text-center">
@@ -10,7 +10,7 @@
   <mat-card-content class="flex flex-col items-center">
     @if (registerError()) {
       <div
-        class="mb-4 rounded-md border border-red-300 bg-red-50 px-4  py-3 text-sm text-red-700 flex items-center gap-2"
+        class="mb-4 rounded-md border border-red-300 bg-red-50 px-4 py-2 text-sm text-red-700 flex items-center gap-2"
         role="alert">
         <mat-icon fontIcon="error_outline" class="text-red-600"></mat-icon>
         <span>{{ registerError() }}</span>
@@ -52,7 +52,7 @@
         <mat-label>Confirmer le mot de passe</mat-label>
         <input matInput type="password" formControlName="passwordConfirm" autocomplete="new-password">
       </mat-form-field>
-      <mat-error class="error-slot text-xs px-4 pb-5"
+      <mat-error class="error-slot text-xs px-4 pb-4"
         [class.is-visible]="registerForm.hasError('passwordMismatch') && (registerForm.controls.password.touched || registerForm.controls.passwordConfirm.touched)">
         Le mot de passe et la confirmation sont différents
       </mat-error>

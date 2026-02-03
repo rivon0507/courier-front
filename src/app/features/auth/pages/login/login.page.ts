@@ -69,6 +69,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit (): void {
+    this.sessionStore.clearError();
     this.loginForm.valueChanges.subscribe(
       () => this.sessionStore.clearError()
     );
