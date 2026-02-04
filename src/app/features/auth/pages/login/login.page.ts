@@ -19,7 +19,8 @@ import { MatIcon } from '@angular/material/icon';
 import { Credentials } from '@core/session/session.model';
 import { filter, take } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { safeNext } from '@core/utils';
 
 @Component({
   selector: 'app-login-page',
@@ -55,6 +56,7 @@ export class LoginPage implements OnInit {
     filter(status => status),
     take(1)
   );
+  private next = inject(ActivatedRoute).snapshot.queryParamMap.get("next");
 
   loggingIn = computed(() => this.sessionStore.activity() === "login");
   loginError = computed(() => this.sessionStore.error());
@@ -64,11 +66,8 @@ export class LoginPage implements OnInit {
     password: ['', Validators.required]
   });
 
-  constructor () {
-    this.authSuccess$.subscribe(() => this.router.navigateByUrl("/home"));
-  }
-
   ngOnInit (): void {
+    this.authSuccess$.subscribe(() => this.router.navigateByUrl(safeNext(this.next, "/home")));
     this.sessionStore.clearError();
     this.loginForm.valueChanges.subscribe(
       () => this.sessionStore.clearError()

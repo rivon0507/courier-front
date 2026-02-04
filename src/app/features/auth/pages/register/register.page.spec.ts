@@ -4,13 +4,8 @@ import { RegisterPage } from './register.page';
 import { AuthApi } from '@core/api/auth.api';
 import { AuthApiMock, MOCK_API_DELAY } from '@core/api/auth.api.mock';
 import { provideRouter, Router } from '@angular/router';
-import { Component } from '@angular/core';
 import { input } from '@test';
 import { SessionStore } from '@core/session/session.store';
-
-@Component({template: `<h1>Home Page</h1>`})
-class HomePage {
-}
 
 describe('RegisterPage', () => {
   let component: RegisterPage;
@@ -22,7 +17,7 @@ describe('RegisterPage', () => {
     await TestBed.configureTestingModule({
       imports: [RegisterPage],
       providers: [
-        provideRouter([{path: "home", component: HomePage}]),
+        provideRouter([]),
         {provide: MOCK_API_DELAY, useValue: 0},
         {provide: AuthApi, useClass: AuthApiMock},
       ]

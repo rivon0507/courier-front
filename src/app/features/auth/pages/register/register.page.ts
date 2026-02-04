@@ -22,10 +22,11 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { SessionStore } from '@core/session/session.store';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { filter, take } from 'rxjs';
+import { safeNext } from '@core/utils';
 
 @Component({
   selector: 'app-register-page',
@@ -60,6 +61,7 @@ export class RegisterPage implements OnInit {
     filter(status => status),
     take(1)
   );
+  private next = inject(ActivatedRoute).snapshot.queryParamMap.get("next");
 
   registering = computed(() => this.sessionStore.activity() === "register");
   registerError = computed(() => this.sessionStore.error());
@@ -74,12 +76,9 @@ export class RegisterPage implements OnInit {
     {validators: [passwordMismatchValidator]}
   );
 
-  constructor () {
-    this.authSuccess$.subscribe(() => this.router.navigateByUrl("/home"));
-  }
-
   ngOnInit (): void {
     this.sessionStore.clearError();
+    this.authSuccess$.subscribe(() => this.router.navigateByUrl(safeNext(this.next, "/home")));
     this.registerForm.valueChanges.subscribe(
       () => this.sessionStore.clearError()
     );
