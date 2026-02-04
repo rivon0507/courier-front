@@ -8,6 +8,17 @@ export const MOCK_API_DELAY = new InjectionToken<number>("MOCK_API_DELAY", {
   factory: () => 1200,
 })
 
+export const MOCK_AUTH_RESPONSE = {
+  accessToken: 'fake-access-token',
+  expiresIn: 600,
+  tokenType: 'Bearer',
+  user: {
+    displayName: 'User',
+    email: 'user@example.com',
+    role: 'USER'
+  }
+};
+
 function optionalDelay<T> (ms: number): MonoTypeOperatorFunction<T> {
   return ms > 0 ? delay(ms) : (source: Observable<T>) => source;
 }
@@ -25,16 +36,7 @@ export class AuthApiMock extends AuthApi {
       );
     }
 
-    return of<AuthResponse>({
-      accessToken: 'fake-access-token',
-      expiresIn: 600,
-      tokenType: 'Bearer',
-      user: {
-        displayName: 'User',
-        email: 'user@example.com',
-        role: 'USER'
-      }
-    }).pipe(
+    return of<AuthResponse>(MOCK_AUTH_RESPONSE).pipe(
       optionalDelay(this.delay)
     );
   }

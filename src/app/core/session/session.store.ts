@@ -49,11 +49,15 @@ export class SessionStore {
 
   logout (): void {
     this.api.logout().subscribe();
+    this.clearSession();
+  }
+
+  clearSession () {
     this._user.set(null);
     this._accessToken.set(null);
   }
 
-  private setUserAndAccessToken (loginResponse: AuthResponse) {
+  setUserAndAccessToken (loginResponse: AuthResponse) {
     this._user.set(loginResponse.user);
     this._accessToken.set(loginResponse.accessToken);
   }

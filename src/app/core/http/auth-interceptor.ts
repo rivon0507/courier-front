@@ -2,17 +2,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { SessionStore } from '@core/session/session.store';
 import { environment } from '@environment';
-
-const PUBLIC_URLS = [
-  "/auth/login",
-  "/auth/register",
-  "/auth/logout",
-  "/auth/refresh"
-];
-
-const isPublicUrl = (url: string) => {
-  return PUBLIC_URLS.some(p => url.endsWith(p));
-};
+import { isPublicUrl } from '@core/http/utils';
 
 function isOurApi (url: string): boolean {
   const apiBase = new URL(environment.apiBaseUrl);
