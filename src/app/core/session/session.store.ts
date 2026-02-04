@@ -13,6 +13,7 @@ export class SessionStore {
   readonly user = this._user.asReadonly();
   readonly isAuthenticated = computed<boolean>(() => !!this.user());
   private _accessToken = signal<string | null>(null);
+  readonly accessToken = this._accessToken.asReadonly();
   private _activity = signal<SessionActivity | null>(null);
   readonly activity = this._activity.asReadonly();
   private _error = signal<string | null>(null);
