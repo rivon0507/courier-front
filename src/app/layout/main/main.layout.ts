@@ -8,7 +8,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { SessionStore } from '@core/session/session.store';
 
 @Component({
   selector: 'app-main-layout',
@@ -27,10 +28,17 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class MainLayout {
   private breakpointObserver = inject(BreakpointObserver);
+  private sessionStore = inject(SessionStore);
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
+  private router = inject(Router);
+
+  protected logout () {
+    this.sessionStore.logout();
+    void this.router.navigateByUrl("/auth/login");
+  }
 }

@@ -46,6 +46,12 @@ export class SessionStore {
     this._error.set(null);
   }
 
+  logout (): void {
+    this.api.logout().subscribe();
+    this._user.set(null);
+    this._accessToken.set(null);
+  }
+
   private setUserAndAccessToken (loginResponse: AuthResponse) {
     this._user.set(loginResponse.user);
     this._accessToken.set(loginResponse.accessToken);

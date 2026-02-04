@@ -39,6 +39,10 @@ export class AuthApiMock extends AuthApi {
     );
   }
 
+  logout (): Observable<void> {
+    return of().pipe(optionalDelay(this.delay));
+  }
+
   override register (request: RegisterRequest): Observable<AuthResponse> {
     if (request.email == "user@example.com") {
       return throwError(() => new Error()).pipe(

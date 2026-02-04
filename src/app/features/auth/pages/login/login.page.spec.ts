@@ -25,7 +25,7 @@ describe('LoginPage', () => {
       providers: [
         {provide: AuthApi, useClass: AuthApiMock},
         {provide: MOCK_API_DELAY, useValue: 0},
-        provideRouter([{path: "home", component:HomePage}]),
+        provideRouter([{path: "home", component: HomePage}]),
       ]
     })
 

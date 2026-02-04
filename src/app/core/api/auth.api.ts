@@ -25,6 +25,8 @@ export interface RegisterRequest {
 export abstract class AuthApi {
   abstract login (request: LoginRequest): Observable<AuthResponse>;
   abstract register (request: RegisterRequest): Observable<AuthResponse>;
+
+  abstract logout (): Observable<void>;
 }
 
 export class ApiError<CODE extends string> extends Error {
