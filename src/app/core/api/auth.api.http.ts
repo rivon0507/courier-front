@@ -16,6 +16,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 const LOGIN_URL = 'http://localhost:8080/api/auth/login';
 const REGISTER_URL = 'http://localhost:8080/api/auth/register';
+const LOGOUT_URL = 'http://localhost:8080/api/auth/logout';
 
 export interface ProblemDetail {
   code: string;
@@ -56,7 +57,7 @@ export class AuthApiHttp extends AuthApi {
   private http = inject(HttpClient);
 
   override login (request: LoginRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(LOGIN_URL, request).pipe(
+    return this.http.post<AuthResponse>(LOGIN_URL, request, {withCredentials: true}).pipe(
       catchError((err: unknown) => {
         if (err instanceof HttpErrorResponse) {
           return throwError(() => mapHttpErrorToApiError<LoginErrorCode>(err, isLoginErrorCode));
@@ -66,8 +67,12 @@ export class AuthApiHttp extends AuthApi {
     );
   }
 
+  override logout (): Observable<void> {
+    return this.http.post<void>(LOGOUT_URL, {}, {withCredentials: true});
+  }
+
   override register (request: RegisterRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(REGISTER_URL, request).pipe(
+    return this.http.post<AuthResponse>(REGISTER_URL, request, {withCredentials: true}).pipe(
       catchError((err: unknown) => {
         if (err instanceof HttpErrorResponse) {
           return throwError(() => mapHttpErrorToApiError<RegisterErrorCode>(err, isRegisterErrorCode));
