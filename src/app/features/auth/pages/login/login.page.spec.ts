@@ -4,14 +4,9 @@ import { LoginPage } from './login.page';
 import { AuthApi } from '@core/api/auth.api';
 import { AuthApiMock, MOCK_API_DELAY } from '@core/api/auth.api.mock';
 import { provideRouter, Router } from '@angular/router';
-import { Component } from '@angular/core';
 import { SessionStore } from '@core/session/session.store';
 import { By } from '@angular/platform-browser';
 import { input } from '@test';
-
-@Component({template: `<h1>Home Page</h1>`})
-class HomePage {
-}
 
 describe('LoginPage', () => {
   let component: LoginPage;
@@ -25,7 +20,7 @@ describe('LoginPage', () => {
       providers: [
         {provide: AuthApi, useClass: AuthApiMock},
         {provide: MOCK_API_DELAY, useValue: 0},
-        provideRouter([{path: "home", component: HomePage}]),
+        provideRouter([]),
       ]
     })
 

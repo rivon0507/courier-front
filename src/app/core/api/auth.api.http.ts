@@ -14,9 +14,9 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-const LOGIN_URL = 'http://localhost:8080/api/auth/login';
-const REGISTER_URL = 'http://localhost:8080/api/auth/register';
-const LOGOUT_URL = 'http://localhost:8080/api/auth/logout';
+const LOGIN_URL = '/auth/login';
+const REGISTER_URL = '/auth/register';
+const LOGOUT_URL = '/auth/logout';
 
 export interface ProblemDetail {
   code: string;
