@@ -2,12 +2,14 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { AuthApi, AuthResponse, LoginRequest, RegisterRequest } from '@core/api/auth.api';
 import { Credentials, SessionActivity, SignUpFormData, User } from '@core/session/session.model';
 import { finalize } from 'rxjs';
+import { NotificationService } from "@core/notification/notification.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class SessionStore {
   private api = inject(AuthApi);
+  private notificationService = inject(NotificationService);
 
   private _user = signal<User | null>(null);
   readonly user = this._user.asReadonly();
@@ -27,7 +29,7 @@ export class SessionStore {
       .pipe(finalize(() => this._activity.set(null)))
       .subscribe({
         next: (loginResponse) => this.setUserAndAccessToken(loginResponse),
-        error: () => this._error.set("Connexion échouée"),
+        error: () => this.handleError("Connexion échouée"),
       });
   }
 
@@ -39,7 +41,7 @@ export class SessionStore {
       .pipe(finalize(() => this._activity.set(null)))
       .subscribe({
         next: (registerResponse) => this.setUserAndAccessToken(registerResponse),
-        error: () => this._error.set("Inscription échouée"),
+        error: () => this.handleError("Inscription échouée"),
       });
   }
 
@@ -60,5 +62,10 @@ export class SessionStore {
   setUserAndAccessToken (loginResponse: AuthResponse) {
     this._user.set(loginResponse.user);
     this._accessToken.set(loginResponse.accessToken);
+  }
+
+  private handleError (error: string) {
+    this._error.set(error);
+    this.notificationService.notify({code: error, kind: "error"});
   }
 }
