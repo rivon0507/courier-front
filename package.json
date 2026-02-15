@@ -11,7 +11,7 @@
   },
   "prettier": {
     "printWidth": 100,
-    "singleQuote": true,
+    "singleQuote": false,
     "overrides": [
       {
         "files": "*.html",
@@ -39,6 +39,7 @@
     "@angular/build": "^21.0.4",
     "@angular/cli": "^21.0.4",
     "@angular/compiler-cli": "^21.0.0",
+    "@jsverse/transloco": "^8.2.1",
     "@tailwindcss/postcss": "^4.1.12",
     "angular-eslint": "21.2.0",
     "autoprefixer": "^10.4.24",

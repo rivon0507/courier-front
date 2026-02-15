@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslocoService } from "@jsverse/transloco";
 
 export interface NotificationPayload {
   kind: "success" | "error" | "info" | "warning";
@@ -18,10 +19,13 @@ const NOTIFICATION_DURATION: Record<NotificationPayload["kind"], number> = {
 })
 export class NotificationService {
   private snackBar = inject(MatSnackBar);
+  private translator = inject(TranslocoService);
 
   notify (payload: NotificationPayload): void {
-    this.snackBar.open(payload.code, "Close", {
-      duration: NOTIFICATION_DURATION[payload.kind],
-    });
+    this.snackBar.open(
+      this.translator.translate(payload.code),
+      this.translator.translate("snackbar.dismiss"),
+      {duration: NOTIFICATION_DURATION[payload.kind]}
+    );
   }
 }
