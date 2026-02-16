@@ -3,6 +3,7 @@ import { environment } from '@environment';
 
 export const baseUrlInterceptor: HttpInterceptorFn = (req, next) => {
   if (/^https?:\/\//.test(req.url)) return next(req);
+  if (/^\/i18n\/\w+\.json/.test(req.url)) return next(req);
   const url = req.url.startsWith('/') ? req.url : `/${req.url}`;
   let baseUrl = environment.apiBaseUrl;
   if (baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, -1);

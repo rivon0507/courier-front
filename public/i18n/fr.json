@@ -1,0 +1,16 @@
+{
+  "snackbar": {
+    "dismiss": "Fermer"
+  },
+  "errors": {
+    "fallback": {
+      "NETWORK_ERROR": "Un problème de connexion est survenu",
+      "UNEXPECTED_ERROR": "Une erreur est survenue",
+      "UNAUTHORIZED_NO_BODY": "Non autorisé",
+      "REQUEST_FAILED": "Une erreur est survenue"
+    },
+    "login": {
+      "AUTH_UNAUTHORIZED": "Connexion échouée"
+    }
+  }
+}

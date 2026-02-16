@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { MainLayout } from './main.layout';
-import { mockMatchMedia } from '@test';
+import { getTranslocoModule, mockMatchMedia } from '@test';
 import { AuthApi } from "@core/api/auth.api";
 import { AuthApiMock } from '@core/api/auth.api.mock';
 import { By } from '@angular/platform-browser';
@@ -22,7 +22,7 @@ describe('MainLayout', () => {
     }
 
     TestBed.configureTestingModule({
-      imports: [MainLayout],
+      imports: [MainLayout, getTranslocoModule()],
       providers: [
         provideRouter([]),
         {provide: AuthApi, useClass: AuthApiMock},
