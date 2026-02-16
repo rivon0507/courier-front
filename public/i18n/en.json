@@ -1,3 +1,16 @@
 {
-  "snackbar.dismiss": "Close"
+  "snackbar": {
+    "dismiss": "Close"
+  },
+  "errors": {
+    "fallback": {
+      "NETWORK_ERROR": "A connection problem occurred",
+      "UNEXPECTED_ERROR": "An unexpected error occurred",
+      "UNAUTHORIZED_NO_BODY": "Unauthorized",
+      "REQUEST_FAILED": "An unexpected error occurred"
+    },
+    "login": {
+      "AUTH_UNAUTHORIZED": "Login failed"
+    }
+  }
 }

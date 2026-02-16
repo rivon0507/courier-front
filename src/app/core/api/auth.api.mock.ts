@@ -1,7 +1,15 @@
 import { inject, Injectable, InjectionToken } from '@angular/core';
-import { AuthApi, AuthResponse, LoginRequest, RegisterRequest } from '@core/api/auth.api';
+import {
+  AuthApi,
+  AuthResponse,
+  LoginErrorCode,
+  LoginRequest,
+  RegisterErrorCode,
+  RegisterRequest
+} from '@core/api/auth.api';
 import { MonoTypeOperatorFunction, Observable, of, throwError } from "rxjs";
 import { delay, dematerialize, materialize } from 'rxjs/operators';
+import { ApiError } from "@core/errors/api-error";
 
 export const MOCK_API_DELAY = new InjectionToken<number>("MOCK_API_DELAY", {
   providedIn: 'root',
@@ -29,7 +37,7 @@ export class AuthApiMock extends AuthApi {
 
   override login (request: LoginRequest): Observable<AuthResponse> {
     if (request.email != "user@example.com") {
-      return throwError(() => new Error()).pipe(
+      return throwError(() => new ApiError<LoginErrorCode>("AUTH_UNAUTHORIZED")).pipe(
         materialize(),
         optionalDelay(this.delay),
         dematerialize()
@@ -47,7 +55,7 @@ export class AuthApiMock extends AuthApi {
 
   override register (request: RegisterRequest): Observable<AuthResponse> {
     if (request.email == "user@example.com") {
-      return throwError(() => new Error()).pipe(
+      return throwError(() => new ApiError<RegisterErrorCode>("EMAIL_ALREADY_TAKEN")).pipe(
         materialize(),
         optionalDelay(this.delay),
         dematerialize()

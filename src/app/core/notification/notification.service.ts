@@ -19,12 +19,12 @@ const NOTIFICATION_DURATION: Record<NotificationPayload["kind"], number> = {
 })
 export class NotificationService {
   private snackBar = inject(MatSnackBar);
-  private translator = inject(TranslocoService);
+  private t = inject(TranslocoService);
 
   notify (payload: NotificationPayload): void {
     this.snackBar.open(
-      this.translator.translate(payload.code),
-      this.translator.translate("snackbar.dismiss"),
+      this.t.translate(payload.code),
+      this.t.translate("snackbar.dismiss"),
       {duration: NOTIFICATION_DURATION[payload.kind]}
     );
   }

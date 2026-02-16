@@ -29,34 +29,9 @@ export abstract class AuthApi {
   abstract logout (): Observable<void>;
 }
 
-export class ApiError<CODE extends string> extends Error {
-  readonly kind = 'api-error' as const;
-
-  constructor (
-    public readonly code: CODE,
-    public readonly detail?: string,
-    public readonly status?: number,
-    cause?: unknown
-  ) {
-    super(code, {cause: cause});
-    this.name = 'ApiError';
-  }
-}
-
 /**
- * Transport-level fallback codes. These are not "backend business codes",
- * but codes the frontend uses when the backend response body is missing/unreadable.
+ * t(errors.login.AUTH_UNAUTHORIZED)
  */
-export const COMMON_API_ERROR_CODES = [
-  'NETWORK_ERROR',
-  'UNEXPECTED_ERROR',
-  'UNAUTHORIZED_NO_BODY',
-  'NOT_FOUND',
-  'REQUEST_FAILED',
-] as const;
-
-export type CommonApiErrorCode = typeof COMMON_API_ERROR_CODES[number];
-
 export const LOGIN_ERROR_CODES = [
   'AUTH_UNAUTHORIZED',
 ] as const;

@@ -3,6 +3,9 @@ import { AuthApi, AuthResponse, LoginRequest, RegisterRequest } from '@core/api/
 import { Credentials, SessionActivity, SignUpFormData, User } from '@core/session/session.model';
 import { finalize } from 'rxjs';
 import { NotificationService } from "@core/notification/notification.service";
+import { err } from "@core/i18n/keys";
+import { ApiError } from "@core/errors/api-error";
+import { AppError } from "@core/errors/fallback-error";
 
 @Injectable({
   providedIn: "root"
@@ -29,7 +32,7 @@ export class SessionStore {
       .pipe(finalize(() => this._activity.set(null)))
       .subscribe({
         next: (loginResponse) => this.setUserAndAccessToken(loginResponse),
-        error: () => this.handleError("Connexion échouée"),
+        error: (e) => this.handleError(e, "login"),
       });
   }
 
@@ -41,7 +44,7 @@ export class SessionStore {
       .pipe(finalize(() => this._activity.set(null)))
       .subscribe({
         next: (registerResponse) => this.setUserAndAccessToken(registerResponse),
-        error: () => this.handleError("Inscription échouée"),
+        error: (e) => this.handleError(e, "register"),
       });
   }
 
@@ -64,7 +67,14 @@ export class SessionStore {
     this._accessToken.set(loginResponse.accessToken);
   }
 
-  private handleError (error: string) {
+  private handleError (e: unknown, op: string) {
+    const error: string =
+      e instanceof ApiError ?
+        err(`${op}.${e.code}`) :
+        e instanceof AppError ?
+          e.i18nKey :
+          err("fallback.UNEXPECTED_ERROR");
+
     this._error.set(error);
     this.notificationService.notify({code: error, kind: "error"});
   }
