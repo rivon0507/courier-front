@@ -4,7 +4,7 @@ import { RegisterPage } from './register.page';
 import { AuthApi } from '@core/api/auth.api';
 import { AuthApiMock, MOCK_API_DELAY } from '@core/api/auth.api.mock';
 import { provideRouter, Router } from '@angular/router';
-import { input } from '@test';
+import { getTranslocoModule, input } from '@test';
 import { SessionStore } from '@core/session/session.store';
 
 describe('RegisterPage', () => {
@@ -15,7 +15,7 @@ describe('RegisterPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegisterPage],
+      imports: [RegisterPage, getTranslocoModule()],
       providers: [
         provideRouter([]),
         {provide: MOCK_API_DELAY, useValue: 0},

@@ -12,6 +12,7 @@ import { provideRouter, Router } from '@angular/router';
 import { RefreshCoordinator } from '@core/http/refresh.coordinator';
 import { AuthApi } from '@core/api/auth.api';
 import { SessionStore } from '@core/session/session.store';
+import { getTranslocoModule } from "../../../test";
 
 
 describe('refreshInterceptor', () => {
@@ -31,6 +32,7 @@ describe('refreshInterceptor', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [getTranslocoModule()],
       providers: [
         provideRouter([]),
         provideHttpClient(withInterceptors([refreshInterceptor])),
