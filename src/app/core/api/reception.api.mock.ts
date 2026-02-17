@@ -5,8 +5,8 @@ import { Reception } from '@features/reception/models/reception.model';
 import { ReceptionApi } from './reception.api';
 
 const MOCK_DATA: Reception[] = [
-  { dateReception: '2023-07-25', expediteur: 'Rabe', reference: '001' },
-  { dateReception: '2026-01-15', expediteur: 'Rasoa', reference: '013' },
+  {id: 1, dateReception: '2023-07-25', expediteur: 'Rabe', reference: '001'},
+  {id: 2, dateReception: '2026-01-15', expediteur: 'Rasoa', reference: '013'},
 ];
 
 @Injectable()
@@ -17,36 +17,32 @@ export class ReceptionApiMock extends ReceptionApi {
     return of([...this.data]).pipe(delay(100));
   }
 
-  get(reference: string): Observable<Reception> {
-    const item = this.data.find((r) => r.reference === reference);
+  get (id: number): Observable<Reception> {
+    const item = this.data.find((r) => r.id === id);
     return item
       ? of({ ...item }).pipe(delay(100))
-      : throwError(() => new Error(`Reception ${reference} not found`));
+      : throwError(() => new Error(`Reception ${id} not found`));
   }
 
-  create(reception: Reception): Observable<Reception> {
-    this.data = [...this.data, { ...reception }];
+  create (reception: Omit<Reception, "id">): Observable<Reception> {
+    const lastId = this.data
+      .map(r => r.id)
+      .reduce((id1, id2) => Math.max(id1, id2), 0);
+    const created = {...reception, id: lastId + 1};
+    this.data = [...this.data, created];
+    return of({...created}).pipe(delay(100));
+  }
+
+  update (id: number, reception: Reception): Observable<Reception> {
+    const index = this.data.findIndex((r) => r.id === id);
+    if (index === -1) return throwError(() => new Error(`Reception ${id} not found`));
+
+    this.data = this.data.map((r) => (r.id === id ? reception : r));
     return of({ ...reception }).pipe(delay(100));
   }
 
-  update(reference: string, reception: Partial<Reception>): Observable<Reception> {
-    const index = this.data.findIndex((r) => r.reference === reference);
-    if (index === -1) {
-      return throwError(() => new Error(`Reception ${reference} not found`));
-    }
-
-    const updated: Reception = { ...this.data[index], ...reception };
-    this.data = this.data.map((r) => (r.reference === reference ? updated : r));
-    return of({ ...updated }).pipe(delay(100));
-  }
-
-  delete(reference: string): Observable<void> {
-    const exists = this.data.some((r) => r.reference === reference);
-    if (!exists) {
-      return throwError(() => new Error(`Reception ${reference} not found`));
-    }
-
-    this.data = this.data.filter((r) => r.reference !== reference);
+  delete (id: number): Observable<void> {
+    this.data = this.data.filter((r) => r.id !== id);
     return of(void 0).pipe(delay(100));
   }
 }

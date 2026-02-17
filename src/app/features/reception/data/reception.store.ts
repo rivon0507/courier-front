@@ -36,24 +36,24 @@ export class ReceptionStore {
       });
   }
 
-  update(reference: string, reception: Partial<Reception>): void {
+  update (id: number, reception: Reception): void {
     this._loading.set(true);
 
-    this.api.update(reference, reception)
+    this.api.update(id, reception)
       .pipe(finalize(() => this._loading.set(false)))
       .subscribe({
-        next: (updatedReception) => this._receptions.update(receptions => receptions.map(r => r.reference === reference ? updatedReception : r)),
+        next: (updatedReception) => this._receptions.update(receptions => receptions.map(r => r.id === id ? updatedReception : r)),
         error: (err) => this.notificationService.notify(err.message || 'Failed to update reception')
       });
   }
 
-  remove(reference: string): void {
+  remove (id: number): void {
     this._loading.set(true);
 
-    this.api.delete(reference)
+    this.api.delete(id)
       .pipe(finalize(() => this._loading.set(false)))
       .subscribe({
-        next: () => this._receptions.update(receptions => receptions.filter(r => r.reference !== reference)),
+        next: () => this._receptions.update(receptions => receptions.filter(r => r.id !== id)),
         error: (err) => this.notificationService.notify(err.message || 'Failed to delete reception')
     });
   }

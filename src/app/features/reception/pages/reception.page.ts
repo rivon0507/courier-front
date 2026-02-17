@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, inject, effect, AfterViewInit } from '@angular/core';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
-import { MatSortModule, MatSort } from '@angular/material/sort';
+import { AfterViewInit, Component, effect, inject, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Reception } from '../models/reception.model';
@@ -48,7 +48,7 @@ export class ReceptionPage implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if (item) {
-          this.store.update(item.reference, result);
+          this.store.update(item.id, result);
         } else {
           this.store.create(result);
         }
