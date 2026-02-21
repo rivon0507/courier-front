@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginPage } from './login.page';
-import { AuthApi } from '@core/api/auth.api';
-import { AuthApiMock, MOCK_API_DELAY } from '@core/api/auth.api.mock';
+import { AuthApi } from '@core/session/auth.api';
+import { AuthApiMock, MOCK_API_DELAY } from '@core/session/auth.api.mock';
 import { provideRouter, Router } from '@angular/router';
 import { SessionStore } from '@core/session/session.store';
 import { By } from '@angular/platform-browser';

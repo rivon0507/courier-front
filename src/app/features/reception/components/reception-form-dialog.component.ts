@@ -8,7 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { Reception } from '../models/reception.model';
+import { Reception } from '@domains/reception/reception.model';
 
 @Component({
   selector: 'app-reception-form-dialog',
@@ -34,7 +34,8 @@ export class ReceptionFormDialogComponent {
   receptionForm = this.fb.group({
     dateReception: [null as string | null, Validators.required],
     expediteur: [null as string | null, Validators.required],
-    reference: [null as string | null, Validators.required]
+    reference: [null as string | null, Validators.required],
+    pieces: [[]]
   });
 
   constructor() {

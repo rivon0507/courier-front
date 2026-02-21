@@ -28,12 +28,15 @@
       "@features/*": [
         "src/app/features/*"
       ],
+      "@domains/*": [
+        "src/app/domains/*"
+      ],
       "@test": [
         "src/test.js"
       ],
       "@environment": [
         "src/environments/environment.ts"
-      ]
+      ],
     }
   },
   "angularCompilerOptions": {

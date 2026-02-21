@@ -4,8 +4,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { Reception } from '../models/reception.model';
-import { ReceptionStore } from '../data/reception.store';
+import { Reception } from '@domains/reception/reception.model';
+import { ReceptionStore } from '@domains/reception/reception.store';
 import { ReceptionFormDialogComponent } from '../components/reception-form-dialog.component';
 import { MatCard, MatCardHeader } from '@angular/material/card';
 

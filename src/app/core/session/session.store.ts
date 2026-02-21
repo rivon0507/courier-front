@@ -1,6 +1,6 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { AuthApi, AuthResponse, LoginRequest, RegisterRequest } from '@core/api/auth.api';
-import { Credentials, SessionActivity, SignUpFormData, User } from '@core/session/session.model';
+import { AuthApi, AuthResponse, LoginRequest, RegisterRequest } from '@core/session/auth.api';
+import { Credentials, SessionActivity, SignUpFormData, User } from '@domains/auth/session.model';
 import { finalize } from 'rxjs';
 import { NotificationService } from "@core/notification/notification.service";
 import { err } from "@core/i18n/keys";

@@ -16,7 +16,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { SessionStore } from '@core/session/session.store';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon';
-import { Credentials } from '@core/session/session.model';
+import { Credentials } from '@domains/auth/session.model';
 import { filter, take } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';

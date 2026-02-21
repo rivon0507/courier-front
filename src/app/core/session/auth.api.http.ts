@@ -7,7 +7,7 @@ import {
   LoginRequest,
   RegisterErrorCode,
   RegisterRequest
-} from '@core/api/auth.api';
+} from '@core/session/auth.api';
 import { catchError, Observable, throwError } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';

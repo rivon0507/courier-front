@@ -4,8 +4,8 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { routes } from './app.routes';
 import { getTranslocoModule, mockMatchMedia } from '@test';
 import { AuthLayout } from './layout/auth/auth.layout';
-import { AuthApi } from '@core/api/auth.api';
-import { AuthApiMock } from '@core/api/auth.api.mock';
+import { AuthApi } from '@core/session/auth.api';
+import { AuthApiMock } from '@core/session/auth.api.mock';
 
 describe('Router navigation', () => {
   beforeEach(() => {

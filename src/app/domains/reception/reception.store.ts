@@ -1,8 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Reception } from '../models/reception.model';
-import { ReceptionApi } from '@core/api/reception.api';
+import { Reception, ReceptionCreateForm } from '@domains/reception/reception.model';
 import { NotificationService } from "@core/notification/notification.service";
 import { finalize } from "rxjs";
+import { ReceptionApi } from "@domains/reception/reception.api";
 
 @Injectable()
 export class ReceptionStore {
@@ -20,18 +20,18 @@ export class ReceptionStore {
     this.api.list()
       .pipe(finalize(() => this._loading.set(false)))
       .subscribe({
-        next: (receptions) => this._receptions.set(receptions),
+        next: (receptions) => this._receptions.set(receptions._items),
         error: (err) => this.notificationService.notify(err.message || 'Failed to load receptions')
       });
   }
 
-  create(reception: Reception): void {
+  create(reception: ReceptionCreateForm): void {
     this._loading.set(true);
 
     this.api.create(reception)
       .pipe(finalize(() => this._loading.set(false)))
       .subscribe({
-        next: (newReception) => this._receptions.update(receptions => [...receptions, newReception]),
+        next: (newReception) => this._receptions.update(receptions => [...receptions, newReception.reception]),
         error: (err) => this.notificationService.notify(err.message || 'Failed to create reception')
       });
   }

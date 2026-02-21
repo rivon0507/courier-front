@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { MainLayout } from './main.layout';
 import { getTranslocoModule, mockMatchMedia } from '@test';
-import { AuthApi } from "@core/api/auth.api";
-import { AuthApiMock } from '@core/api/auth.api.mock';
+import { AuthApi } from "@core/session/auth.api";
+import { AuthApiMock } from '@core/session/auth.api.mock';
 import { By } from '@angular/platform-browser';
 import { SessionStore } from '@core/session/session.store';
 

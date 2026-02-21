@@ -6,7 +6,7 @@ import {
   LoginRequest,
   RegisterErrorCode,
   RegisterRequest
-} from '@core/api/auth.api';
+} from '@core/session/auth.api';
 import { MonoTypeOperatorFunction, Observable, of, throwError } from "rxjs";
 import { delay, dematerialize, materialize } from 'rxjs/operators';
 import { ApiError } from "@core/errors/api-error";

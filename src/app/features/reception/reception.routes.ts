@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { ReceptionPage } from './pages/reception.page';
-import { ReceptionApi } from '@core/api/reception.api';
-import { ReceptionApiMock } from '@core/api/reception.api.mock';
-import { ReceptionStore } from '@features/reception/data/reception.store';
+import { ReceptionApi } from '@domains/reception/reception.api';
+import { ReceptionStore } from '@domains/reception/reception.store';
+import { ReceptionApiMock } from "@domains/reception/reception.api.mock";
 
 export const receptionRoutes: Routes = [
   {

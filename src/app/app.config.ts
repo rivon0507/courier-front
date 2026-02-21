@@ -8,20 +8,20 @@ import {
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { AuthApi } from '@core/api/auth.api';
+import { AuthApi } from '@core/session/auth.api';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { baseUrlInterceptor } from '@core/http/base-url-interceptor';
 import { provideTransloco, TranslocoService } from '@jsverse/transloco';
 import { firstValueFrom } from "rxjs";
 import { TranslocoHttpLoader } from "@core/i18n/transloco-loader";
-import { AuthApiHttp } from "@core/api/auth.api.http";
+import { AuthApiMock } from "@core/session/auth.api.mock";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideHttpClient(withFetch(), withInterceptors([baseUrlInterceptor])),
-    {provide: AuthApi, useClass: AuthApiHttp},
+    {provide: AuthApi, useClass: AuthApiMock},
     provideTransloco({
       config: {
         availableLangs: ['en', 'fr'],
