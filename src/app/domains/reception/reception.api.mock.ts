@@ -17,6 +17,7 @@ import {
 const MOCK_DATA: Reception[] = [
   {id: 1, dateReception: '2023-07-25', expediteur: 'Rabe', reference: '001'},
   {id: 2, dateReception: '2026-01-15', expediteur: 'Rasoa', reference: '013'},
+  {id: 3, dateReception: '2025-03-15', expediteur: 'RANDRIAMAMPIANDRA Tianarilanto Christian Mario Gabriel', reference: '014'},
 ];
 
 @Injectable()

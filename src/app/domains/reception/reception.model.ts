@@ -11,3 +11,9 @@ export interface ReceptionCreateForm {
   reference: string;
   pieces: [];
 }
+
+export interface ReceptionPiece {
+  id: number;
+  nature: string;
+  quantite: number;
+}

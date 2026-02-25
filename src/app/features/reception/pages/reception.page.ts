@@ -7,13 +7,14 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Reception } from '@domains/reception/reception.model';
 import { ReceptionStore } from '@domains/reception/reception.store';
 import { ReceptionFormDialogComponent } from '../components/reception-form-dialog.component';
-import { MatCard, MatCardHeader } from '@angular/material/card';
+import { DatePipe } from "@angular/common";
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: 'app-reception-page',
   templateUrl: './reception.page.html',
   styleUrl: './reception.page.css',
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, MatDialogModule, MatCard, MatCardHeader],
+  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, MatDialogModule, DatePipe, MatIcon],
 })
 export class ReceptionPage implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -23,7 +24,7 @@ export class ReceptionPage implements OnInit, AfterViewInit {
   private dialog = inject(MatDialog);
 
   dataSource = new MatTableDataSource<Reception>();
-  displayedColumns = ['dateReception', 'expediteur', 'reference'];
+  displayedColumns = ['dateReception', 'reference', 'expediteur', 'actions'];
 
   constructor() {
     effect(() => {
@@ -37,6 +38,10 @@ export class ReceptionPage implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sortingDataAccessor = (item, property: string) => {
+      if (property == "reference" || property == "expediteur") return item[property].toLowerCase();
+      return item[property as keyof Reception];
+    };
   }
 
   openReceptionForm(item?: Reception): void {
@@ -54,5 +59,9 @@ export class ReceptionPage implements OnInit, AfterViewInit {
         }
       }
     });
+  }
+
+  protected trackById(_index: number, item: Reception): number {
+    return item.id;
   }
 }

@@ -3,7 +3,7 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <div class="flex flex-col justify-between h-full">
+    <div class="flex flex-col justify-between h-full me-2">
       <div>
         <mat-toolbar>Menu</mat-toolbar>
         <mat-nav-list>
