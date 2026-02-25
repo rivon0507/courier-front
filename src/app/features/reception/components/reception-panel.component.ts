@@ -9,11 +9,17 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Reception } from '@domains/reception/reception.model';
+import { TranslocoService } from "@jsverse/transloco";
+
+/**
+ * t(reception.dialog.title.view, reception.dialog.title.create, reception.dialog.title.edit)
+ */
+type DialogMode = "view" | "create" | "edit";
 
 @Component({
-  selector: 'app-reception-form-dialog',
-  templateUrl: './reception-form-dialog.component.html',
-  styleUrl: './reception-form-dialog.component.css',
+  selector: 'app-reception-panel',
+  templateUrl: './reception-panel.component.html',
+  styleUrl: './reception-panel.component.css',
   imports: [
     MatInputModule,
     MatButtonModule,
@@ -26,10 +32,15 @@ import { Reception } from '@domains/reception/reception.model';
     ReactiveFormsModule
   ]
 })
-export class ReceptionFormDialogComponent {
+export class ReceptionPanelComponent {
   private fb = inject(FormBuilder);
-  private dialogRef = inject(MatDialogRef<ReceptionFormDialogComponent>);
-  public data: Reception | null = inject(MAT_DIALOG_DATA);
+  private dialogRef = inject(MatDialogRef<ReceptionPanelComponent>);
+  private t = inject(TranslocoService);
+  public data: { mode: DialogMode, reception: Reception | null } = inject(MAT_DIALOG_DATA);
+  protected mode = this.data.mode;
+  protected reception = this.data.reception;
+  protected title: string;
+  protected readOnly = this.mode == "view";
 
   receptionForm = this.fb.group({
     dateReception: [null as string | null, Validators.required],
@@ -39,9 +50,12 @@ export class ReceptionFormDialogComponent {
   });
 
   constructor() {
-    if (this.data) {
-      this.receptionForm.patchValue(this.data);
+    if (this.reception && (this.mode == "view" || this.mode == "edit")) {
+      this.receptionForm.patchValue(this.reception);
+    } else {
+      this.mode = "create";
     }
+    this.title = this.t.translate(`reception.dialog.title.${this.mode}`, {ref: this.reception?.reference});
   }
 
   onSubmit(): void {

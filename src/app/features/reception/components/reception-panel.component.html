@@ -1,13 +1,13 @@
-<h2 mat-dialog-title>Réception de courrier</h2>
+<h2 mat-dialog-title>{{ title }}</h2>
 <form [formGroup]="receptionForm" novalidate (ngSubmit)="onSubmit()">
   <mat-dialog-content>
     <div class="row">
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Date de réception</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="dateReception">
+          <input matInput [matDatepicker]="picker" formControlName="dateReception" [readonly]="readOnly">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker #picker [disabled]="readOnly"></mat-datepicker>
           @if (receptionForm.controls['dateReception'].hasError('required')) {
             <mat-error>La date de réception est <strong>requise</strong></mat-error>
           }
@@ -18,7 +18,7 @@
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Expéditeur</mat-label>
-          <input matInput placeholder="Nom de l'expéditeur" formControlName="expediteur">
+          <input matInput placeholder="Nom de l'expéditeur" formControlName="expediteur" [readonly]="readOnly">
           @if (receptionForm.controls['expediteur'].hasError('required')) {
             <mat-error>L'expéditeur est <strong>requis</strong></mat-error>
           }
@@ -29,7 +29,7 @@
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Référence</mat-label>
-          <input matInput placeholder="Référence du courrier" formControlName="reference">
+          <input matInput placeholder="Référence du courrier" formControlName="reference" [readonly]="readOnly">
           @if (receptionForm.controls['reference'].hasError('required')) {
             <mat-error>La référence est <strong>requise</strong></mat-error>
           }

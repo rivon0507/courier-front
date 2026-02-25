@@ -1,16 +1,25 @@
 {
-  "snackbar": {
-    "dismiss": "Fermer"
+  "reception": {
+    "dialog": {
+      "title": {
+        "view": "Détails du courrier reçu {{ ref }}",
+        "create": "Enregister un courrier reçu",
+        "edit": "Modifier le courrier reçu {{ ref }}"
+      }
+    }
   },
   "errors": {
+    "login": {
+      "AUTH_UNAUTHORIZED": "Connexion échouée"
+    },
     "fallback": {
       "NETWORK_ERROR": "Un problème de connexion est survenu",
       "UNEXPECTED_ERROR": "Une erreur est survenue",
       "UNAUTHORIZED_NO_BODY": "Non autorisé",
       "REQUEST_FAILED": "Une erreur est survenue"
-    },
-    "login": {
-      "AUTH_UNAUTHORIZED": "Connexion échouée"
     }
+  },
+  "snackbar": {
+    "dismiss": "Fermer"
   }
 }

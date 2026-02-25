@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Reception } from '@domains/reception/reception.model';
 import { ReceptionStore } from '@domains/reception/reception.store';
-import { ReceptionFormDialogComponent } from '../components/reception-form-dialog.component';
+import { ReceptionPanelComponent } from '../components/reception-panel.component';
 import { DatePipe } from "@angular/common";
 import { MatIcon } from "@angular/material/icon";
 
@@ -45,9 +45,11 @@ export class ReceptionPage implements OnInit, AfterViewInit {
   }
 
   openReceptionForm(item?: Reception): void {
-    const dialogRef = this.dialog.open(ReceptionFormDialogComponent, {
-      width: '500px',
-      data: item || null
+    const dialogRef = this.dialog.open(ReceptionPanelComponent, {
+      minWidth: '40vw',
+      data: item || null,
+      panelClass: ['drawer-dialog', 'drawer-right'],
+      position: { right: '0' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -63,5 +65,14 @@ export class ReceptionPage implements OnInit, AfterViewInit {
 
   protected trackById(_index: number, item: Reception): number {
     return item.id;
+  }
+
+  protected openDetails(row: Reception) {
+    this.dialog.open(ReceptionPanelComponent, {
+      minWidth: '40vw',
+      data: {reception: row, mode: "view"},
+      panelClass: ['drawer-dialog', 'drawer-right'],
+      position: {right: '0'},
+    });
   }
 }
