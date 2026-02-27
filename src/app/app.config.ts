@@ -14,16 +14,18 @@ import { baseUrlInterceptor } from '@core/http/base-url-interceptor';
 import { provideTransloco, TranslocoService } from '@jsverse/transloco';
 import { firstValueFrom } from "rxjs";
 import { TranslocoHttpLoader } from "@core/i18n/transloco-loader";
-import { AuthApiMock } from "@core/session/auth.api.mock";
 import { authInterceptor } from "@core/http/auth-interceptor";
 import { refreshInterceptor } from "@core/http/refresh-interceptor";
+import { RefreshCoordinator } from "@core/http/refresh.coordinator";
+import { AuthApiHttp } from "@core/session/auth.api.http";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideHttpClient(withFetch(), withInterceptors([baseUrlInterceptor, authInterceptor, refreshInterceptor])),
-    {provide: AuthApi, useClass: AuthApiMock},
+    RefreshCoordinator,
+    {provide: AuthApi, useClass: AuthApiHttp},
     provideTransloco({
       config: {
         availableLangs: ['en', 'fr'],
