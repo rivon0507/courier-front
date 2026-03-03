@@ -1,44 +1,16 @@
 <h2 mat-dialog-title>{{ title }}</h2>
 <form [formGroup]="receptionForm" novalidate (ngSubmit)="onSubmit()">
   <mat-dialog-content>
-    <div class="row">
-      <div class="col">
-        <mat-form-field class="full-width">
-          <mat-label>Date de réception</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="dateReception" [readonly]="readOnly">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker [disabled]="readOnly"></mat-datepicker>
-          @if (receptionForm.controls['dateReception'].hasError('required')) {
-            <mat-error>La date de réception est <strong>requise</strong></mat-error>
-          }
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <mat-form-field class="full-width">
-          <mat-label>Expéditeur</mat-label>
-          <input matInput placeholder="Nom de l'expéditeur" formControlName="expediteur" [readonly]="readOnly">
-          @if (receptionForm.controls['expediteur'].hasError('required')) {
-            <mat-error>L'expéditeur est <strong>requis</strong></mat-error>
-          }
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <mat-form-field class="full-width">
-          <mat-label>Référence</mat-label>
-          <input matInput placeholder="Référence du courrier" formControlName="reference" [readonly]="readOnly">
-          @if (receptionForm.controls['reference'].hasError('required')) {
-            <mat-error>La référence est <strong>requise</strong></mat-error>
-          }
-        </mat-form-field>
-      </div>
-    </div>
+    <app-reception-form [form]="receptionForm" [mode]="mode"/>
+    <h3>Liste des pieces</h3>
+    <app-reception-pieces-form [form]="piecesForm" [mode]="mode"/>
   </mat-dialog-content>
-  <mat-dialog-actions align="end">
-    <button mat-button type="button" (click)="onCancel()">Annuler</button>
-    <button mat-raised-button color="primary" type="submit" [disabled]="!receptionForm.valid">Enregistrer</button>
-  </mat-dialog-actions>
+  @if (mode !== "view") {
+    <mat-dialog-actions align="end">
+      <button (click)="onCancel()" mat-button type="button">Annuler</button>
+      <button [disabled]="!(receptionForm.valid && piecesForm.valid)" color="primary" mat-raised-button type="submit">
+        Enregistrer
+      </button>
+    </mat-dialog-actions>
+  }
 </form>

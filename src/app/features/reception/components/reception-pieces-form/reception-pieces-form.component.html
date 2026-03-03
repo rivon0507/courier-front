@@ -1,0 +1,15 @@
+<table class="w-full">
+  <thead>
+  <th>Nature</th>
+  <th>Quantité</th>
+  </thead>
+  <tbody>
+    @for (control of formControls(); track control.value.id) {
+      @let piece = control.value;
+      <tr>
+        <td>{{ piece.nature }}</td>
+        <td class="text-right tabular-nums">{{ piece.quantite }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

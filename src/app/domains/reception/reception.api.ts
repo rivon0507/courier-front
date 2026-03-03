@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import {
   Page,
   PageParams,
+  PieceResponse,
   ReceptionCreateRequest,
   ReceptionDetailsResponse,
   ReceptionResponse,
@@ -18,4 +19,6 @@ export abstract class ReceptionApi {
   abstract update(id: number, reception: ReceptionUpdateRequest): Observable<ReceptionResponse>;
 
   abstract delete(id: number): Observable<void>;
+
+  abstract getPieces(receptionId: number): Observable<PieceResponse[]>;
 }

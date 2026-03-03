@@ -1,0 +1,36 @@
+<div [formGroup]="form()">
+
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="w-full">
+        <mat-label>Date de réception</mat-label>
+        <input [matDatepicker]="picker" [readonly]="readOnly()" formControlName="dateReception" matInput>
+        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker [disabled]="readOnly()"></mat-datepicker>
+        @if (form().controls['dateReception'].hasError('required')) {
+          <mat-error>La date de réception est <strong>requise</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field class="w-full">
+        <mat-label>Référence</mat-label>
+        <input [readonly]="readOnly()" formControlName="reference" matInput placeholder="Référence du courrier">
+        @if (form().controls['reference'].hasError('required')) {
+          <mat-error>La référence est <strong>requise</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="w-full">
+        <mat-label>Expéditeur</mat-label>
+        <input [readonly]="readOnly()" formControlName="expediteur" matInput placeholder="Nom de l'expéditeur">
+        @if (form().controls['expediteur'].hasError('required')) {
+          <mat-error>L'expéditeur est <strong>requis</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </div>
+</div>

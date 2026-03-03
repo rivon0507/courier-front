@@ -17,7 +17,7 @@ import { TranslocoHttpLoader } from "@core/i18n/transloco-loader";
 import { authInterceptor } from "@core/http/auth-interceptor";
 import { refreshInterceptor } from "@core/http/refresh-interceptor";
 import { RefreshCoordinator } from "@core/http/refresh.coordinator";
-import { AuthApiHttp } from "@core/session/auth.api.http";
+import { AuthApiMock } from "@core/session/auth.api.mock";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,7 +25,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withFetch(), withInterceptors([baseUrlInterceptor, authInterceptor, refreshInterceptor])),
     RefreshCoordinator,
-    {provide: AuthApi, useClass: AuthApiHttp},
+    {provide: AuthApi, useClass: AuthApiMock},
     provideTransloco({
       config: {
         availableLangs: ['en', 'fr'],
