@@ -1,16 +1,25 @@
 {
-  "snackbar": {
-    "dismiss": "Close"
+  "reception": {
+    "dialog": {
+      "title": {
+        "view": "Details of the received mail {{ ref }}",
+        "create": "Add a received mail",
+        "edit": "Edit the received mail {{ ref }}"
+      }
+    }
   },
   "errors": {
+    "login": {
+      "AUTH_UNAUTHORIZED": "Login failed"
+    },
     "fallback": {
       "NETWORK_ERROR": "A connection problem occurred",
       "UNEXPECTED_ERROR": "An unexpected error occurred",
       "UNAUTHORIZED_NO_BODY": "Unauthorized",
       "REQUEST_FAILED": "An unexpected error occurred"
-    },
-    "login": {
-      "AUTH_UNAUTHORIZED": "Login failed"
     }
+  },
+  "snackbar": {
+    "dismiss": "Close"
   }
 }

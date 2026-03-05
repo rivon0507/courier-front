@@ -6,11 +6,11 @@ import { HttpClient, HttpInterceptorFn, provideHttpClient, withInterceptors } fr
 import { refreshInterceptor } from './refresh-interceptor';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { firstValueFrom } from 'rxjs';
-import { MOCK_AUTH_RESPONSE } from '@core/api/auth.api.mock';
+import { MOCK_AUTH_RESPONSE } from '@core/session/auth.api.mock';
 import { expect } from 'vitest';
 import { provideRouter, Router } from '@angular/router';
 import { RefreshCoordinator } from '@core/http/refresh.coordinator';
-import { AuthApi } from '@core/api/auth.api';
+import { AuthApi } from '@core/session/auth.api';
 import { SessionStore } from '@core/session/session.store';
 import { getTranslocoModule } from "../../../test";
 

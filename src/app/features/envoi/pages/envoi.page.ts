@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, inject, effect, AfterViewInit } from '@an
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
-import { Envoi } from '../models/envoi.model';
-import { EnvoiStore } from '../data/envoi.store';
+import { Envoi } from '@domains/envoi/envoi.model';
+import { EnvoiStore } from '@domains/envoi/envoi.store';
 
 @Component({
   selector: 'app-envoi-page',

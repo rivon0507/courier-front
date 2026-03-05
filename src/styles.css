@@ -6,3 +6,27 @@
     @apply transition-colors;
   }
 }
+
+.drawer-dialog .mat-mdc-dialog-container {
+  padding: 0;
+}
+
+.drawer-dialog .mat-mdc-dialog-surface {
+  border-radius: 0;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.drawer-right .mat-mdc-dialog-surface {
+  animation: drawer-in-right 180ms ease-out;
+}
+
+@keyframes drawer-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

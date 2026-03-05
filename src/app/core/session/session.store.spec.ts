@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { SessionStore } from './session.store';
-import { AuthApi } from '@core/api/auth.api';
-import { AuthApiMock, MOCK_API_DELAY } from '@core/api/auth.api.mock';
+import { AuthApi } from '@core/session/auth.api';
+import { AuthApiMock, MOCK_API_DELAY } from '@core/session/auth.api.mock';
 import { getTranslocoModule } from "../../../test";
 
 describe('SessionStore', () => {

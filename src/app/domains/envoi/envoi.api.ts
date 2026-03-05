@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Envoi } from '@features/envoi/models/envoi.model';
+import { Envoi } from '@domains/envoi/envoi.model';
 
 export abstract class EnvoiApi {
   abstract list(): Observable<Envoi[]>;

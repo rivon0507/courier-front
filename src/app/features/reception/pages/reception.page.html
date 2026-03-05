@@ -1,35 +1,51 @@
-<mat-card>
-  <mat-card-header>
-    <div style="padding: 16px;">
-      <h1>Réception de courrier</h1>
+<section class="px-4 py-4 max-w-6xl h-full box-border">
+  <header class="flex items-center justify-between mb-4">
+    <div>
+      <h1 class="text-2xl font-semibold">Courriers reçus</h1>
+      <p class="text-sm font-light">Liste des courriers enregistrés</p>
     </div>
-  </mat-card-header>
-  <div style="padding: 16px;">
+    <div class="p-4">
     <button mat-flat-button color="primary" (click)="openReceptionForm()">
       Nouvelle réception
     </button>
   </div>
-  <table mat-table class="full-width-table" matSort aria-label="Elements" [dataSource]="dataSource">
+  </header>
+  <table mat-table class="full-width-table" matSort aria-label="Elements" [dataSource]="dataSource" [trackBy]="trackById">
     <!-- DateReception Column -->
     <ng-container matColumnDef="dateReception">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date de récéption</th>
-      <td mat-cell *matCellDef="let row">{{row.dateReception}}</td>
-    </ng-container>
-
-    <!-- Expediteur Column -->
-    <ng-container matColumnDef="expediteur">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Expéditeur</th>
-      <td mat-cell *matCellDef="let row">{{row.expediteur}}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Reçu le</th>
+      <td mat-cell *matCellDef="let row">{{ row.dateReception | date:'mediumDate' }}</td>
     </ng-container>
 
     <!-- Reference Column -->
     <ng-container matColumnDef="reference">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Référence</th>
-      <td mat-cell *matCellDef="let row">{{row.reference}}</td>
+      <td mat-cell *matCellDef="let row">{{ row.reference }}</td>
+    </ng-container>
+
+    <!-- Expediteur Column -->
+    <ng-container matColumnDef="expediteur">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Expéditeur</th>
+      <td mat-cell *matCellDef="let row">{{ row.expediteur }}</td>
+    </ng-container>
+
+    <!-- Actions column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let row">
+        <div class="space-x-4">
+          <button mat-icon-button (click)="openDetails(row)">
+            <mat-icon>description</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
   </table>
 
   <mat-paginator #paginator
@@ -39,4 +55,4 @@
       [pageSizeOptions]="[5, 10, 20]"
       aria-label="Select page">
   </mat-paginator>
-</mat-card>
+</section>

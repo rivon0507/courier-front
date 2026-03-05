@@ -11,7 +11,7 @@ describe('auth interceptor', () => {
     TestBed.runInInjectionContext(() => authInterceptor(req, next));
   let http: HttpClient;
   let httpMock: HttpTestingController;
-  let token: string | null = "access-token"
+  let token: string | null = "access-token";
 
   beforeEach(() => {
     TestBed.configureTestingModule({

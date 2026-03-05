@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Envoi } from '../models/envoi.model';
-import { EnvoiApi } from '@core/api/envoi.api';
+import { Envoi } from '@domains/envoi/envoi.model';
+import { EnvoiApi } from '@domains/envoi/envoi.api';
 import { finalize } from "rxjs";
 import { NotificationService } from "@core/notification/notification.service";
 

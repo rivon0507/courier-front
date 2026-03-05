@@ -27,6 +27,7 @@ import { SessionStore } from '@core/session/session.store';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { filter, take } from 'rxjs';
 import { safeNext } from '@core/utils';
+import { TranslocoPipe } from "@jsverse/transloco";
 
 @Component({
   selector: 'app-register-page',
@@ -48,7 +49,8 @@ import { safeNext } from '@core/utils';
     MatTooltip,
     NgOptimizedImage,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    TranslocoPipe
   ],
   templateUrl: './register.page.html',
   styleUrl: './register.page.css',

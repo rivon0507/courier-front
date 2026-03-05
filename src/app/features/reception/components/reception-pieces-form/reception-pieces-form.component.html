@@ -1,0 +1,32 @@
+<div class="pieces-table">
+  <table class="w-full">
+    <thead class="sticky top-0">
+    <tr>
+      <th class="text-start">Nature</th>
+      <th class="text-end">Quantité</th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (control of formControls(); track control.value.id) {
+        @let piece = control.value;
+        <tr class="table-row">
+          <td>{{ piece.nature }}</td>
+          <td class="text-end tabular-nums">{{ piece.quantite }}</td>
+        </tr>
+      }
+    </tbody>
+    <tfoot class="sticky bottom-0">
+    <tr aria-hidden="true">
+      <td class="p-0" colspan="999">
+        <div class="h-px bg-black/30"></div>
+      </td>
+    </tr>
+    <tr>
+      <th class="text-start">Total</th>
+      <td class="text-end tabular-nums">{{ formControls().length }}<span class="hidden">{{ pieces()?.length }}</span>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+  <div aria-hidden="true" class="scroll-indicator"></div>
+</div>

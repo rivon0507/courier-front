@@ -16,11 +16,12 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { SessionStore } from '@core/session/session.store';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon';
-import { Credentials } from '@core/session/session.model';
+import { Credentials } from '@domains/auth/session.model';
 import { filter, take } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { safeNext } from '@core/utils';
+import { TranslocoPipe } from "@jsverse/transloco";
 
 @Component({
   selector: 'app-login-page',
@@ -43,7 +44,8 @@ import { safeNext } from '@core/utils';
     MatTooltip,
     MatProgressSpinner,
     MatIcon,
-    RouterLink
+    RouterLink,
+    TranslocoPipe
   ],
   templateUrl: './login.page.html',
   styleUrl: './login.page.css',

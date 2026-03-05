@@ -6,7 +6,7 @@ import { catchError, finalize, shareReplay, switchMap } from 'rxjs/operators';
 import { isPublicUrl } from '@core/http/utils';
 import { RefreshCoordinator } from '@core/http/refresh.coordinator';
 import { SessionStore } from '@core/session/session.store';
-import { AuthResponse } from '@core/api/auth.api';
+import { AuthResponse } from '@core/session/auth.api';
 
 /**
  * Marks internal calls (like /auth/refresh) so the interceptor won't try to refresh again.

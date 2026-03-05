@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { Envoi } from '@features/envoi/models/envoi.model';
-import { EnvoiApi } from './envoi.api';
+import { Envoi } from '@domains/envoi/envoi.model';
+import { EnvoiApi } from '@domains/envoi/envoi.api';
 
 const MOCK_DATA: Envoi[] = [
   { id: 1, dateEnvoi: '1997-12-12', destinataire: 'Raketaka', observation: "Pour demande d'affectation" },

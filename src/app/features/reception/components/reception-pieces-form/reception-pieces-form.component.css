@@ -1,0 +1,49 @@
+.pieces-table {
+  max-height: var(--reception-pieces-table-max-height, 40vh);
+  overflow-y: auto;
+  position: relative;
+}
+
+:host {
+  display: block;
+}
+
+.pieces-table thead,
+.pieces-table tfoot {
+  background-color: var(--mat-sys-surface, #fff);
+  z-index: 1;
+}
+
+.scroll-indicator {
+  position: sticky;
+  bottom: 0.35rem;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+  color: color-mix(in srgb, var(--mat-sys-on-surface), transparent 30%);
+  transform: translateY(-150%);
+}
+
+.scroll-indicator::before {
+  content: "↓";
+  font-size: 1.2rem;
+  line-height: 1;
+  animation: scroll-indicator-float 1.6s ease-in-out infinite;
+}
+
+@keyframes scroll-indicator-float {
+  0%,
+  100% {
+    transform: translateY(-10%);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateY(10%);
+    opacity: 0.45;
+  }
+}
+
+.table-row:hover {
+  background-color: color-mix(in srgb, var(--mat-sys-on-surface), transparent 90%);
+}
