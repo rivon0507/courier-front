@@ -61,7 +61,7 @@ export class ReceptionPanelComponent implements OnInit {
     })
   ]);
   private t = inject(TranslocoService);
-  private receptionStore = inject(ReceptionStore);
+  protected receptionStore = inject(ReceptionStore);
   private dialogRef = inject(MatDialogRef<ReceptionPanelComponent>);
 
   constructor() {

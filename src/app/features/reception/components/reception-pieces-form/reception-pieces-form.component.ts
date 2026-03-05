@@ -16,6 +16,7 @@ type FormMode = "view" | "edit" | "create";
 })
 export class ReceptionPiecesFormComponent {
   public form = input.required<FormArray<FormGroup<PiecesForm>>>();
+  public pieces = input.required<ReceptionPiece[] | null>();
   public mode = input<FormMode>("create");
   protected readOnly = computed(() => this.mode() === "view");
   protected readonly formControls = computed(() => this.form().controls);

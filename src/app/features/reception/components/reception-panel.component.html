@@ -1,9 +1,9 @@
 <h2 mat-dialog-title>{{ title }}</h2>
 <form [formGroup]="receptionForm" novalidate (ngSubmit)="onSubmit()">
-  <mat-dialog-content>
+  <mat-dialog-content class="min-h-fit">
     <app-reception-form [form]="receptionForm" [mode]="mode"/>
     <h3>Liste des pieces</h3>
-    <app-reception-pieces-form [form]="piecesForm" [mode]="mode"/>
+    <app-reception-pieces-form [form]="piecesForm" [mode]="mode" [pieces]="receptionStore.pieces()"/>
   </mat-dialog-content>
   @if (mode !== "view") {
     <mat-dialog-actions align="end">
