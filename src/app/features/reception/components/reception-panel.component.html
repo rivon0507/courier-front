@@ -3,7 +3,8 @@
   <mat-dialog-content class="min-h-fit">
     <app-reception-form [form]="receptionForm" [mode]="mode"/>
     <h3>Liste des pieces</h3>
-    <app-reception-pieces-form [form]="piecesForm" [mode]="mode" [pieces]="receptionStore.pieces()"/>
+    <app-reception-pieces-form class="pieces-form" [form]="piecesForm" [mode]="mode"
+                               [pieces]="receptionStore.pieces()"/>
   </mat-dialog-content>
   @if (mode !== "view") {
     <mat-dialog-actions align="end">

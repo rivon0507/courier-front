@@ -1,3 +1,7 @@
 mat-dialog-content {
   padding-top: 1rem !important;
 }
+
+app-reception-pieces-form.pieces-form {
+  --reception-pieces-table-max-height: 40vh;
+}
