@@ -1,31 +1,47 @@
-<div class="mat-elevation-z2">
-  <table mat-table class="full-width-table" matSort aria-label="Elements" [dataSource]="dataSource">
-    <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-      <td mat-cell *matCellDef="let row">{{row.id}}</td>
-    </ng-container>
-
+<section class="px-4 py-4 max-w-6xl h-full box-border envoi-page">
+  <header class="flex items-center justify-between mb-4">
+    <div>
+      <h1 class="text-2xl font-semibold">Courriers envoyés</h1>
+      <p class="text-sm font-light">Liste des courriers envoyés</p>
+    </div>
+  </header>
+  <table [dataSource]="dataSource" [trackBy]="trackById" aria-label="Elements" class="full-width-table" mat-table
+         matSort>
     <!-- DateEnvoi Column -->
     <ng-container matColumnDef="dateEnvoi">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date d'envoi</th>
-      <td mat-cell *matCellDef="let row">{{row.dateEnvoi}}</td>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Envoyé le</th>
+      <td *matCellDef="let row" mat-cell>{{ row.dateEnvoi | date:'mediumDate' }}</td>
+    </ng-container>
+
+    <!-- Reference Column -->
+    <ng-container matColumnDef="reference">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Référence</th>
+      <td *matCellDef="let row" mat-cell>{{ row.reference }}</td>
     </ng-container>
 
     <!-- Destinataire Column -->
     <ng-container matColumnDef="destinataire">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Destinataire</th>
-      <td mat-cell *matCellDef="let row">{{row.destinataire}}</td>
+      <td *matCellDef="let row" mat-cell>{{ row.destinataire }}</td>
     </ng-container>
 
-    <!-- Observation Column -->
-    <ng-container matColumnDef="observation">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Observation</th>
-      <td mat-cell *matCellDef="let row">{{row.observation}}</td>
+    <!-- Actions column -->
+    <ng-container matColumnDef="actions">
+      <th *matHeaderCellDef mat-header-cell>Actions</th>
+      <td *matCellDef="let row" mat-cell>
+        <div class="space-x-4">
+          <button (click)="openDetails(row)" mat-icon-button>
+            <mat-icon>description</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" class="table-row" mat-row></tr>
   </table>
 
   <mat-paginator #paginator
@@ -35,4 +51,4 @@
       [pageSizeOptions]="[5, 10, 20]"
       aria-label="Select page">
   </mat-paginator>
-</div>
+</section>

@@ -8,6 +8,15 @@
       }
     }
   },
+  "envoi": {
+    "dialog": {
+      "title": {
+        "view": "Détails du courrier envoyé {{ ref }}",
+        "create": "Enregister un courrier envoyé",
+        "edit": "Modifier le courrier envoyé {{ ref }}"
+      }
+    }
+  },
   "errors": {
     "login": {
       "AUTH_UNAUTHORIZED": "Connexion échouée"

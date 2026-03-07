@@ -18,6 +18,7 @@ import { authInterceptor } from "@core/http/auth-interceptor";
 import { refreshInterceptor } from "@core/http/refresh-interceptor";
 import { RefreshCoordinator } from "@core/http/refresh.coordinator";
 import { AuthApiMock } from "@core/session/auth.api.mock";
+import { provideNativeDateAdapter } from "@angular/material/core";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -40,5 +41,6 @@ export const appConfig: ApplicationConfig = {
       const t = inject(TranslocoService);
       return firstValueFrom(t.selectTranslation(t.getDefaultLang()));
     }),
+    provideNativeDateAdapter(),
   ]
 };

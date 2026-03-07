@@ -8,6 +8,15 @@
       }
     }
   },
+  "envoi": {
+    "dialog": {
+      "title": {
+        "view": "Details of the sent mail {{ ref }}",
+        "create": "Add a sent mail",
+        "edit": "Edit the sent mail {{ ref }}"
+      }
+    }
+  },
   "errors": {
     "login": {
       "AUTH_UNAUTHORIZED": "Login failed"

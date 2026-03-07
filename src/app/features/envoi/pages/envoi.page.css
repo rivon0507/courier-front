@@ -1,3 +1,36 @@
 .full-width-table {
   width: 100%;
 }
+
+.envoi-page {
+  border-radius: 16px;
+}
+
+.mat-column-dateEnvoi {
+  width: 16%;
+}
+
+.mat-column-reference {
+  width: 16%;
+}
+
+.mat-column-destinataire {
+  width: 50%;
+}
+
+.mat-column-actions {
+  width: 18%;
+}
+
+.table-row:hover {
+  background-color: color-mix(in srgb, var(--mat-sys-on-surface), transparent 96%);
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid var(--mat-divider-color);
+}
+
+.table-row:hover .mat-mdc-icon-button:hover {
+  background-color: var(--mat-sys-surface);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}

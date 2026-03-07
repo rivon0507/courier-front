@@ -1,0 +1,45 @@
+<div [formGroup]="form()">
+
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="w-full">
+        <mat-label>Date d'envoi</mat-label>
+        <input [matDatepicker]="picker" [readonly]="readOnly()" formControlName="dateEnvoi" matInput>
+        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker [disabled]="readOnly()"></mat-datepicker>
+        @if (form().controls['dateEnvoi'].hasError('required')) {
+          <mat-error>La date d'envoi est <strong>requise</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field class="w-full">
+        <mat-label>Référence</mat-label>
+        <input [readonly]="readOnly()" formControlName="reference" matInput placeholder="Référence du courrier">
+        @if (form().controls['reference'].hasError('required')) {
+          <mat-error>La référence est <strong>requise</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="w-full">
+        <mat-label>Destinataire</mat-label>
+        <input [readonly]="readOnly()" formControlName="destinataire" matInput placeholder="Nom du destinataire">
+        @if (form().controls['destinataire'].hasError('required')) {
+          <mat-error>Le destinataire est <strong>requis</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="w-full">
+        <mat-label>Observation</mat-label>
+        <textarea [readonly]="readOnly()" formControlName="observation" matInput placeholder="Observation"
+                  rows="1"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
