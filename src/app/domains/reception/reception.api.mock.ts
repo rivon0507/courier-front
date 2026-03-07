@@ -3,14 +3,12 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { ReceptionApi } from '@domains/reception/reception.api';
 import {
-  Page,
-  PageParams,
-  PieceResponse,
   ReceptionCreateRequest,
   ReceptionDetailsResponse,
   ReceptionResponse,
   ReceptionUpdateRequest
 } from "@domains/reception/reception.dto";
+import { Page, PageParams, PieceResponse } from "@domains/common";
 
 const RECEPTIONS: ReceptionResponse[] = [
   {id: 1, dateReception: '2023-07-25', expediteur: 'Rabe', reference: '001'},
@@ -51,7 +49,7 @@ export class ReceptionApiMock extends ReceptionApi {
   }
 
   override get(id: number): Observable<ReceptionResponse> {
-    const item = this.receptions.find((r) => r.id === id);
+    const item = this.receptions.find(r => r.id === id);
     return item
       ? of({ ...item }).pipe(delay(100))
       : throwError(() => new Error(`Reception ${id} not found`));
@@ -70,16 +68,16 @@ export class ReceptionApiMock extends ReceptionApi {
   }
 
   override update(id: number, reception: ReceptionUpdateRequest): Observable<ReceptionResponse> {
-    const index = this.receptions.findIndex((r) => r.id === id);
+    const index = this.receptions.findIndex(r => r.id === id);
     if (index === -1) return throwError(() => new Error(`Reception ${id} not found`));
 
     const updated = {id: id, ...reception};
-    this.receptions = this.receptions.map((r) => (r.id === id ? updated : r));
+    this.receptions = this.receptions.map(r => r.id === id ? updated : r);
     return of({ ...updated }).pipe(delay(100));
   }
 
   override delete(id: number): Observable<void> {
-    this.receptions = this.receptions.filter((r) => r.id !== id);
+    this.receptions = this.receptions.filter(r => r.id !== id);
     return of(void 0).pipe(delay(100));
   }
 
