@@ -1,13 +1,11 @@
 import { Observable } from 'rxjs';
 import {
-  Page,
-  PageParams,
-  PieceResponse,
   ReceptionCreateRequest,
   ReceptionDetailsResponse,
   ReceptionResponse,
   ReceptionUpdateRequest
 } from "@domains/reception/reception.dto";
+import { Page, PageParams, PieceResponse } from "@domains/common";
 
 export abstract class ReceptionApi {
   abstract list(page?: PageParams): Observable<Page<ReceptionResponse>>;

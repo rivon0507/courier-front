@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+<form [formGroup]="envoiForm" novalidate>
+  <mat-dialog-content class="min-h-fit">
+    <app-envoi-form [form]="envoiForm" [mode]="mode"/>
+    <h3>Liste des pieces</h3>
+    <app-pieces-form [form]="piecesForm" [mode]="mode" [pieces]="envoiStore.pieces()" class="pieces-form"/>
+  </mat-dialog-content>
+</form>

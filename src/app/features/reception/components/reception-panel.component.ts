@@ -12,7 +12,7 @@ import { Reception, ReceptionPiece } from '@domains/reception/reception.model';
 import { TranslocoService } from "@jsverse/transloco";
 import { ReceptionFormComponent } from "@features/reception/components/reception-form";
 import { ReceptionStore } from "@domains/reception/reception.store";
-import { ReceptionPiecesFormComponent } from "@features/reception/components/reception-pieces-form";
+import { PiecesFormComponent } from "@shared/components/pieces-form";
 
 /**
  * t(reception.dialog.title.view, reception.dialog.title.create, reception.dialog.title.edit)
@@ -38,7 +38,7 @@ type PiecesForm = {
     MatNativeDateModule,
     ReactiveFormsModule,
     ReceptionFormComponent,
-    ReceptionPiecesFormComponent
+    PiecesFormComponent
   ]
 })
 export class ReceptionPanelComponent implements OnInit {

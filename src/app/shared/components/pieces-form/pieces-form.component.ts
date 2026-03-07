@@ -1,22 +1,27 @@
 import { Component, computed, input } from '@angular/core';
-import { ReceptionPiece } from "@domains/reception/reception.model";
 import { FormArray, FormControl, FormGroup } from "@angular/forms";
 
+export interface PieceFormValue {
+  id: number;
+  nature: string;
+  quantite: number;
+}
+
 type PiecesForm = {
-  [K in keyof ReceptionPiece]: FormControl<ReceptionPiece[K] | null>;
+  [K in keyof PieceFormValue]: FormControl<PieceFormValue[K] | null>;
 };
 
 type FormMode = "view" | "edit" | "create";
 
 @Component({
-  selector: 'app-reception-pieces-form',
+  selector: 'app-pieces-form',
   imports: [],
-  templateUrl: './reception-pieces-form.component.html',
-  styleUrl: './reception-pieces-form.component.css',
+  templateUrl: './pieces-form.component.html',
+  styleUrl: './pieces-form.component.css',
 })
-export class ReceptionPiecesFormComponent {
+export class PiecesFormComponent {
   public form = input.required<FormArray<FormGroup<PiecesForm>>>();
-  public pieces = input.required<ReceptionPiece[] | null>();
+  public pieces = input.required<PieceFormValue[] | null>();
   public mode = input<FormMode>("create");
   protected readOnly = computed(() => this.mode() === "view");
   protected readonly formControls = computed(() => this.form().controls);

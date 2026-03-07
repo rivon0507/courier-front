@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  background-color: color-mix(in srgb, var(--mat-sys-secondary), transparent 94%);
+}
+
+mat-dialog-content {
+  padding-top: 1rem !important;
+  background-color: transparent;
+}
+
+app-pieces-form.pieces-form {
+  --pieces-table-max-height: 40vh;
+}

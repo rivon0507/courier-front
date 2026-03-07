@@ -1,5 +1,5 @@
 .pieces-table {
-  max-height: var(--reception-pieces-table-max-height, 40vh);
+  max-height: var(--pieces-table-max-height, 40vh);
   overflow-y: auto;
   position: relative;
 }

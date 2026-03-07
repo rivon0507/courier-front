@@ -1,10 +1,17 @@
 import { Observable } from 'rxjs';
-import { Envoi } from '@domains/envoi/envoi.model';
+import { EnvoiCreateRequest, EnvoiDetailsResponse, EnvoiResponse, EnvoiUpdateRequest } from "@domains/envoi/envoi.dto";
+import { Page, PageParams, PieceResponse } from "@domains/common";
 
 export abstract class EnvoiApi {
-  abstract list(): Observable<Envoi[]>;
-  abstract get(id: number): Observable<Envoi>;
-  abstract create(envoi: Omit<Envoi, 'id'>): Observable<Envoi>;
-  abstract update(id: number, envoi: Partial<Envoi>): Observable<Envoi>;
+  abstract list(page?: PageParams): Observable<Page<EnvoiResponse>>;
+
+  abstract get(id: number): Observable<EnvoiResponse>;
+
+  abstract create(envoi: EnvoiCreateRequest): Observable<EnvoiDetailsResponse>;
+
+  abstract update(id: number, envoi: EnvoiUpdateRequest): Observable<EnvoiResponse>;
+
   abstract delete(id: number): Observable<void>;
+
+  abstract getPieces(envoiId: number): Observable<PieceResponse[]>;
 }

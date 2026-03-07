@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Envoi } from '@domains/envoi/envoi.model';
+import { Envoi, EnvoiCreateForm, EnvoiPiece } from '@domains/envoi/envoi.model';
 import { EnvoiApi } from '@domains/envoi/envoi.api';
 import { finalize } from "rxjs";
 import { NotificationService } from "@core/notification/notification.service";
@@ -13,6 +13,8 @@ export class EnvoiStore {
   readonly envois = this._envois.asReadonly();
   private _loading = signal<boolean>(false);
   readonly loading = this._loading.asReadonly();
+  private _pieces = signal<EnvoiPiece[] | null>(null);
+  readonly pieces = this._pieces.asReadonly();
 
   load(): void {
     this._loading.set(true);
@@ -20,23 +22,23 @@ export class EnvoiStore {
     this.api.list()
       .pipe(finalize(() => this._loading.set(false)))
       .subscribe({
-        next: (envois) => this._envois.set(envois),
+        next: (envois) => this._envois.set(envois._items),
         error: (err) => this.notificationService.notify(err.message || 'Failed to load envois')
       });
   }
 
-  create(envoi: Omit<Envoi, 'id'>): void {
+  create(envoi: EnvoiCreateForm): void {
     this._loading.set(true);
 
     this.api.create(envoi)
       .pipe(finalize(() => this._loading.set(false)))
       .subscribe({
-        next: (newEnvoi) => this._envois.update(envois => [...envois, newEnvoi]),
+        next: (newEnvoi) => this._envois.update(envois => [...envois, newEnvoi.envoi]),
         error: (err) => this.notificationService.notify(err.message || 'Failed to create envoi')
       });
   }
 
-  update(id: number, envoi: Partial<Envoi>): void {
+  update(id: number, envoi: Envoi): void {
     this._loading.set(true);
 
     this.api.update(id, envoi)
@@ -55,6 +57,16 @@ export class EnvoiStore {
       .subscribe({
         next: () => this._envois.update(envois => envois.filter(e => e.id !== id)),
         error: (err) => this.notificationService.notify(err.message || 'Failed to delete envoi')
+      });
+  }
+
+  selectEnvoi(id: number): void {
+    this._loading.set(true);
+    this.api.getPieces(id)
+      .pipe(finalize(() => this._loading.set(false)))
+      .subscribe({
+        next: pieces => this._pieces.set(pieces.map(p => ({...p, nature: p.designation}))),
+        error: err => this.notificationService.notify(err.message || 'Failed to fetch envoi pieces')
       });
   }
 }
